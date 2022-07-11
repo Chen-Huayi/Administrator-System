@@ -1,5 +1,5 @@
 import {Card} from "antd";
-// import logo from 'src/assets/xPQd8DhT.png'
+// import logo from 'src/assets/1.png'
 
 function Login() {
     return (

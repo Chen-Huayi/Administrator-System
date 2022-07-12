@@ -1,13 +1,13 @@
 import {Card, Form, Input, Button, Checkbox, message} from "antd";
-// import logo from 'src/assets/html.png'
+import logo from 'src/assets/1.jpg'
 import './index.scss'
 import {useStore} from "src/store";
 import {useNavigate} from 'react-router-dom'
 
+
 function Login() {
     const {loginStore}=useStore()
     const navigate=useNavigate()
-
 
     function onFinished(values){
         console.log(values)
@@ -17,23 +17,24 @@ function Login() {
         })
         navigate('/', {replace: true})
         message.success('success')
-
     }
-
 
     function onFinishedFailed(err){
         console.log('Failed: ', err)
     }
 
-
     return (
         <div className="login">
             <Card className="login-container">
-                <img className="login-logo" src="src/assets/html.png" alt="" />
+                <img className="login-logo" src={logo} alt="" />
                 {/* form */}
 
                 <Form
-                    initialValues={{ remember: true }}
+                    initialValues={{
+                        remember: true,
+                        mobile: 13811111111,
+                        code: 246810
+                    }}
                     onFinish={onFinished}
                     onFinishFailed={onFinishedFailed}
                 >

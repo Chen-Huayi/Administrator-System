@@ -1,5 +1,6 @@
 import { Layout, Menu, Popconfirm } from 'antd'
-import {Outlet, Link, useLocation} from 'react-router-dom'
+import {Outlet, Link, useLocation, useNavigate} from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import {
     HomeOutlined,
     DiffOutlined,
@@ -7,20 +8,34 @@ import {
     LogoutOutlined
 } from '@ant-design/icons'
 import './index.scss'
-
+import {useStore} from 'src/store'
+import {useEffect} from "react";
 const { Header, Sider } = Layout
 
 function MyLayout () {
     const {pathname}=useLocation()
+    const {userStore, loginStore}=useStore()
+
+    useEffect(()=>{
+        userStore.getUserInfo()
+    }, [userStore])
+
+    const navigate=useNavigate()
+    const onConfirm=()=>{
+        loginStore.logOut()
+        navigate('/login')
+    }
 
     return (
         <Layout>
             <Header className="header">
                 <div className="logo" />
                 <div className="user-info">
-                    <span className="user-name">user.name</span>
+                    <span className="user-name">{userStore.userInfo.name}</span>
                     <span className="user-logout">
-                        <Popconfirm title="是否确认退出？" okText="退出" cancelText="取消">
+                        <Popconfirm
+                            onConfirm={onConfirm}
+                            title="是否确认退出？" okText="退出" cancelText="取消">
                             <LogoutOutlined /> 退出
                         </Popconfirm>
                     </span>
@@ -53,4 +68,4 @@ function MyLayout () {
     )
 }
 
-export default MyLayout
+export default observer(MyLayout)

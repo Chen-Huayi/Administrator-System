@@ -1,22 +1,22 @@
 import {Card, Form, Input, Button, Checkbox, message} from "antd";
 import logo from 'src/assets/1.jpg'
 import './index.scss'
-import {useStore} from "src/store";
 import {useNavigate} from 'react-router-dom'
+import {useStore} from "src/store";
 
 
 function Login() {
     const {loginStore}=useStore()
     const navigate=useNavigate()
 
-    function onFinished(values){
+    async function onFinished(values){
         console.log(values)
-        loginStore.getToken({
+        await loginStore.getToken({
             mobile: values.username,
             code: values.password
         })
         navigate('/', {replace: true})
-        message.success('success')
+        message.success('Successfully login')
     }
 
     function onFinishedFailed(err){

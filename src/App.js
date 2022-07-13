@@ -3,6 +3,9 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import {AuthComponent} from 'src/components/AuthComponent'
 import './App.css'
+import Publish from "./pages/Publish";
+import Article from "./pages/Article";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -14,7 +17,12 @@ function App() {
                     <AuthComponent>
                         <Layout/>
                     </AuthComponent>
-                  }></Route>
+                  }>
+                      <Route index element={<Home />}></Route>
+                      <Route path='article' element={<Article />}></Route>
+                      <Route path='publish' element={<Publish />}></Route>
+
+                  </Route>
                   <Route path='/login' element={<Login></Login>}></Route>
               </Routes>
           </div>

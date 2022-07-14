@@ -5,6 +5,7 @@ import locale from 'antd/es/date-picker/locale/en_US'
 import './index.scss'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import img404 from 'src/assets/5.jpg'
+import {useEffect, useState} from "react";
 
 
 const { Option } = Select
@@ -14,21 +15,17 @@ function Article () {
     const onFinish=(values)=>{
         console.log(values)
     }
+    const [backendData, setBackendData]=useState([{}])
+    useEffect(()=>{
+        fetch('/api/article')
+            .then(res=>res.json())
+            .then(data=>{
+                    setBackendData(data)
+                }
+            )
+    }, [])
 
-    const data = [
-        {
-            id: '8218',
-            comment_count: 0,
-            cover: {
-                images:['http://geek.itheima.net/resources/images/15.jpg'],
-            },
-            like_count: 0,
-            pubdate: '2019-03-11 09:00:00',
-            read_count: 2,
-            status: 2,
-            title: 'wkwebview离线化加载h5资源解决方案'
-        }
-    ]
+    const data = [backendData]
 
     const columns = [
         {

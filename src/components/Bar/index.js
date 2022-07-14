@@ -6,7 +6,7 @@ function Bar({title, xData, yData, style}){
     const domRef=useRef()
     const chartInit =()=>{
         // const myChart=echarts.init(domRef.current)
-
+        //
         // myChart.setOption({
         //     title: {
         //         text: title

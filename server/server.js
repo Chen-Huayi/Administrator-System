@@ -14,26 +14,41 @@ try {
         res.json(config[0])
     })
 
-
-
 } catch (err) {
     console.log(`Error reading file from disk: ${err}`);
 }
 
 
 app.get("/api/article", (req, res)=>{
-    res.json(    {
-        'id': '8218',
-        'comment_count': 0,
-        'cover': {
-            'images':['http://geek.itheima.net/resources/images/15.jpg'],
-        },
-        'like_count': 0,
-        'pubdate': '2022-03-11 09:00:00',
-        'read_count': 2,
-        'status': 2,
-        'title': 'wkwebview离线化加载h5资源解决方案'
-    })
+    res.json(
+        // [
+            // {
+            //     'id': '111',
+            //     'comment_count': 99,
+            //     'cover': {
+            //         'images':['http://geek.itheima.net/resources/images/15.jpg'],
+            //     },
+            //     'like_count': 0,
+            //     'pubdate': '2022-03-11 09:00:00',
+            //     'read_count': 2,
+            //     'status': 2,
+            //     'title': 'wkwebview离线化加载h5资源解决方案'
+            // },
+            {
+                'id': '8218',
+                'comment_count': 0,
+                'cover': {
+                    'images':['http://geek.itheima.net/resources/images/15.jpg'],
+                },
+                'like_count': 0,
+                'pubdate': '2022-03-11 09:00:00',
+                'read_count': 2,
+                'status': 2,
+                'title': 'wkwebview离线化加载h5资源解决方案'
+            }
+
+        // ]
+    )
 })
 
 
@@ -41,3 +56,10 @@ app.get("/api/article", (req, res)=>{
 app.listen(5000, ()=>{
     console.log('start on port 5000')
 })
+
+
+
+
+
+
+

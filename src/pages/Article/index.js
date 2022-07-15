@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { Table, Tag, Space, Card, Breadcrumb, Form, Button, Radio, DatePicker, Select } from 'antd'
 import 'moment/locale/zh-cn'
 import locale from 'antd/es/date-picker/locale/en_US'
 import './index.scss'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import img404 from 'src/assets/5.jpg'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {http} from "src/utils";
 
 const { Option } = Select
@@ -22,23 +22,92 @@ function Article () {
             )
     }, [])
 
-    // const data = [backendData]
-    const data = [{
-        'id': '8218',
-        'comment_count': 0,
-        'cover': {
-            'images':['http://geek.itheima.net/resources/images/15.jpg'],
-        },
-        'like_count': 0,
-        'pubdate': '2022-03-11 09:00:00',
-        'read_count': 2,
-        'status': 2,
-        'title': 'wkwebview离线化加载h5资源解决方案'
-    }]
+    const [articleList, setArticleList]=useState({
+        list: [],
+        count: 0
+    })
+    const [params, setParams] = useState({
+        page: 1,
+        per_page: 10
+    })
+
+    const onFinish=(values)=>{
+        console.log(values)
+
+        const {id , date, status}=values
+        const parameter={}
+        if (status!==-1){
+            parameter.status = status
+        }
+        if (id){
+            parameter.id = id
+        }
+        if (date) {
+            parameter.begin_pubdate = date[0].format('YYYY-MM-DD')
+            parameter.end_pubdate = date[1].format('YYYY-MM-DD')
+        }
+
+        setParams({
+            ...params, ...parameter
+        })
+    }
+
+
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('/mp/articles', { params })
+            const { results, total_count } = res.data
+            setArticleList({
+                list: results,
+                count: total_count
+            })
+        }
+        loadList()
+    }, [params])
+
+
+
+    const [backendData, setBackendData]=useState([])
+    useEffect(()=>{
+        fetch('/api/article', {params})
+            .then(res=>res.json())
+            .then(data=>{
+                setBackendData(data)
+                console.log(data)
+
+                // const { results, total_count } = data
+                // setBackendData({
+                //     list: results,
+                //     count: total_count
+                // })
+
+            })
+    }, [params])
+    const data1 = [backendData]
+
+    const pageChange=(page)=>{
+        setParams({
+            ...params, page
+        })
+    }
+
+    const navigate=useNavigate()
+    const publishArticle=(data)=>{
+        navigate(`/publish?id=${data.id}`)
+    }
+
+    const deleteArticle=async (data)=>{
+        await http.delete(`/mp/articles/${data.id}`)
+        // delete(`/api/article/${data.id}`)
+        setParams({
+            ...params,
+            page: 1
+        })
+    }
 
     const columns = [
         {
-            title: '封面',
+            title: 'Cover',
             dataIndex: 'cover',
             width:120,
             render: cover => {
@@ -46,48 +115,81 @@ function Article () {
             }
         },
         {
-            title: '标题',
+            title: 'Title',
             dataIndex: 'title',
             width: 220
         },
         {
-            title: '状态',
+            title: 'Status',
             dataIndex: 'status',
             render: data => <Tag color="green">审核通过</Tag>
         },
         {
-            title: '发布时间',
+            title: 'Publish Date',
             dataIndex: 'pubdate'
         },
         {
-            title: '阅读数',
+            title: 'View',
             dataIndex: 'read_count'
         },
         {
-            title: '评论数',
+            title: 'Comment',
             dataIndex: 'comment_count'
         },
         {
-            title: '点赞数',
+            title: 'Like',
             dataIndex: 'like_count'
         },
         {
-            title: '操作',
+            title: 'Operation',
             render: data => {
                 return (
                     <Space size="middle">
-                        <Button type="primary" shape="circle" icon={<EditOutlined />} />
+                        <Button
+                            type="primary"
+                            shape="circle"
+                            icon={<EditOutlined />}
+                            onClick={()=>publishArticle(data)}
+                        />
                         <Button
                             type="primary"
                             danger
                             shape="circle"
                             icon={<DeleteOutlined />}
+                            onClick={()=>deleteArticle(data)}
                         />
                     </Space>
                 )
             }
         }
     ]
+
+    /*const data = [
+        {
+            'id': '1111',
+            'comment_count': 0,
+            'cover': 'src/assets/4.jpg',
+            'like_count': 0,
+            'pubdate': '2022-03-11 09:00:00',
+            'read_count': 2,
+            'status': 2,
+            'title': 'wkwebview离线化加载h5资源解决方案'
+        },
+        {
+            'id': '2222',
+            'comment_count': 0,
+            'cover': {
+                'images':['http://geek.itheima.net/resources/images/15.jpg'],
+            },
+            'like_count': 0,
+            'pubdate': '2022-03-11 09:00:00',
+            'read_count': 2,
+            'status': 2,
+            'title': 'wkwebview离线化加载h5资源解决方案'
+        },
+    ]*/
+
+
 
 
     return (
@@ -104,6 +206,7 @@ function Article () {
                 style={{ marginBottom: 20 }}
             >
                 <Form
+                    onFinish={onFinish}
                     initialValues={{ status: null }}>
                     <Form.Item label="Status" name="status">
                         <Radio.Group>
@@ -118,7 +221,6 @@ function Article () {
                     <Form.Item label="Channel" name="channel_id">
                         <Select
                             placeholder="Please select channel"
-                            defaultValue='Vue.js'
                             style={{ width: 120 }}
                         >
                             {(typeof channelList.channel_name==='undefined')?(<p>Loading...</p>):(
@@ -126,7 +228,6 @@ function Article () {
                                     (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
                                 )
                             )}
-
                         </Select>
                     </Form.Item>
 
@@ -141,10 +242,20 @@ function Article () {
                     </Form.Item>
                 </Form>
             </Card>
-            <Card title={`? results after selecting：`}>
-                <Table rowKey="id" columns={columns} dataSource={data} />
-            </Card>
+            <Card title={`${articleList.count} results after selecting:`}>
+                <Table
+                    rowKey="id"
+                    columns={columns}
+                    dataSource={articleList.list}
+                    // dataSource={data1}
+                    pagination={{
+                        pageSize: params.per_page,
+                        total: articleList.count,
+                        onChange: pageChange
+                    }}
 
+                />
+            </Card>
         </div>
     )
 }

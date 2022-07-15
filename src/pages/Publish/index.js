@@ -9,13 +9,35 @@ import {
     Space,
     Select
 } from 'antd'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.scss'
+import {useEffect, useState} from "react";
+import {http} from "src/utils";
+import {observer} from "mobx-react-lite";
+import React from "react";
 
 const { Option } = Select
 
 function Publish(){
+
+    const [channelList, setChannelList]=useState([])
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('/api/channel')
+            setChannelList(res)
+        }
+        loadList()
+    }, [])
+
+
+
+
+
+
+
     return (
         <div className="publish">
             <Card
@@ -31,7 +53,7 @@ function Publish(){
                 <Form
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 16 }}
-                    initialValues={{ type: 1 }}
+                    initialValues={{ type: 1, content: 'This is content' }}
                 >
                     <Form.Item
                         label="Title"
@@ -46,7 +68,11 @@ function Publish(){
                         rules={[{ required: true, message: 'Choose channel' }]}
                     >
                         <Select placeholder="Please choose channel" style={{ width: 400 }}>
-                            <Option value={0}>Recommend</Option>
+                            {(typeof channelList.channel_name==='undefined')?(<p>Loading...</p>):(
+                                channelList.channel_name.map(
+                                    (item, i)=>(<Option key={i} value={i}>{item}</Option>)
+                                )
+                            )}
                         </Select>
                     </Form.Item>
 
@@ -73,7 +99,13 @@ function Publish(){
                         label="Content"
                         name="content"
                         rules={[{ required: true, message: 'Please enter content' }]}
-                    ></Form.Item>
+                    >
+                        <ReactQuill
+                            className="publish-quill"
+                            theme="snow"
+                            placeholder="Please enter content"
+                        />
+                    </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 4 }}>
                         <Space>
@@ -88,4 +120,4 @@ function Publish(){
     )
 }
 
-export default Publish
+export default observer(Publish)

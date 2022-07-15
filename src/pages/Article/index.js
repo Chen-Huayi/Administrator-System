@@ -7,30 +7,22 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import img404 from 'src/assets/5.jpg'
 import React, {useEffect, useState} from "react";
 import {http} from "src/utils";
+import {observer} from "mobx-react-lite";
 
 const { Option } = Select
 const { RangePicker } = DatePicker
 
 function Article () {
     const [channelList, setChannelList]=useState([])
-    useEffect(()=>{
-        fetch('/api/channel')
-            .then(res=>res.json())
-            .then(data=>{
-                    setChannelList(data)
-                }
-            )
-    }, [])
-
     const [articleList, setArticleList]=useState({
         list: [],
         count: 0
     })
+    const [article, setArticle]=useState([])
     const [params, setParams] = useState({
         page: 1,
         per_page: 10
     })
-
     const onFinish=(values)=>{
         console.log(values)
 
@@ -51,60 +43,6 @@ function Article () {
             ...params, ...parameter
         })
     }
-
-
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('/mp/articles', { params })
-            const { results, total_count } = res.data
-            setArticleList({
-                list: results,
-                count: total_count
-            })
-        }
-        loadList()
-    }, [params])
-
-
-
-    const [backendData, setBackendData]=useState([])
-    useEffect(()=>{
-        fetch('/api/article', {params})
-            .then(res=>res.json())
-            .then(data=>{
-                setBackendData(data)
-                console.log(data)
-
-                // const { results, total_count } = data
-                // setBackendData({
-                //     list: results,
-                //     count: total_count
-                // })
-
-            })
-    }, [params])
-    const data1 = [backendData]
-
-    const pageChange=(page)=>{
-        setParams({
-            ...params, page
-        })
-    }
-
-    const navigate=useNavigate()
-    const publishArticle=(data)=>{
-        navigate(`/publish?id=${data.id}`)
-    }
-
-    const deleteArticle=async (data)=>{
-        await http.delete(`/mp/articles/${data.id}`)
-        // delete(`/api/article/${data.id}`)
-        setParams({
-            ...params,
-            page: 1
-        })
-    }
-
     const columns = [
         {
             title: 'Cover',
@@ -164,30 +102,71 @@ function Article () {
         }
     ]
 
-    /*const data = [
-        {
-            'id': '1111',
-            'comment_count': 0,
-            'cover': 'src/assets/4.jpg',
-            'like_count': 0,
-            'pubdate': '2022-03-11 09:00:00',
-            'read_count': 2,
-            'status': 2,
-            'title': 'wkwebview离线化加载h5资源解决方案'
-        },
-        {
-            'id': '2222',
-            'comment_count': 0,
-            'cover': {
-                'images':['http://geek.itheima.net/resources/images/15.jpg'],
-            },
-            'like_count': 0,
-            'pubdate': '2022-03-11 09:00:00',
-            'read_count': 2,
-            'status': 2,
-            'title': 'wkwebview离线化加载h5资源解决方案'
-        },
-    ]*/
+    // const [channelList, setChannelList]=useState([])
+    // useEffect(()=>{
+    //     fetch('/api/channel')
+    //         .then(res=>res.json())
+    //         .then(data=>{
+    //                 setChannelList(data)
+    //             }
+    //         )
+    // }, [])
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('/api/channel')
+            setChannelList(res)
+        }
+        loadList()
+    }, [])
+
+
+
+
+
+
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
+            // const res = await http.get('/api/articles', { params })
+            const { results, total_count } = res.data
+            setArticleList({
+                list: results,
+                count: total_count
+            })
+        }
+        loadList()
+    }, [params])
+
+    useEffect(()=>{
+        const loadList=async ()=> {
+            const res = await http.get('/api/articles', {params})
+            setArticle(res)
+        }
+        loadList()
+    }, [params])
+
+
+
+
+
+    const pageChange=(page)=>{
+        setParams({
+            ...params, page
+        })
+    }
+    const navigate=useNavigate()
+    const publishArticle=(data)=>{
+        navigate(`/publish?id=${data.id}`)
+    }
+    const deleteArticle=async (data)=>{
+        await http.delete(`/mp/articles/${data.id}`)
+        // delete(`/api/article/${data.id}`)
+        setParams({
+            ...params,
+            page: 1
+        })
+    }
+
 
 
 
@@ -247,7 +226,7 @@ function Article () {
                     rowKey="id"
                     columns={columns}
                     dataSource={articleList.list}
-                    // dataSource={data1}
+                    // dataSource={[article]}
                     pagination={{
                         pageSize: params.per_page,
                         total: articleList.count,
@@ -260,4 +239,4 @@ function Article () {
     )
 }
 
-export default Article
+export default observer(Article)

@@ -55,7 +55,7 @@ function Login() {
                             },
                         ]}
                     >
-                        <Input size="large" placeholder="请输入手机号" />
+                        <Input size="large" placeholder="Enter phone number" />
                     </Form.Item>
 
                     <Form.Item
@@ -73,7 +73,7 @@ function Login() {
                             }
                         ]}
                     >
-                        <Input size="large" placeholder="请输入验证码" maxLength={6} />
+                        <Input size="large" placeholder="Verify code" maxLength={6} />
                     </Form.Item>
 
                     <Form.Item name="remember" valuePropName="checked">

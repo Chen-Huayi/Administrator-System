@@ -32,7 +32,7 @@ function Login() {
                 <Form
                     initialValues={{
                         remember: true,
-                        mobile: 13811111111,
+                        mobile: 12345678900,
                         code: 246810
                     }}
                     onFinish={onFinished}

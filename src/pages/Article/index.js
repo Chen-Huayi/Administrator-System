@@ -6,26 +6,35 @@ import './index.scss'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import img404 from 'src/assets/5.jpg'
 import {useEffect, useState} from "react";
-
+import {http} from "src/utils";
 
 const { Option } = Select
 const { RangePicker } = DatePicker
 
 function Article () {
-    const onFinish=(values)=>{
-        console.log(values)
-    }
-    const [backendData, setBackendData]=useState([{}])
+    const [channelList, setChannelList]=useState([])
     useEffect(()=>{
-        fetch('/api/article')
+        fetch('/api/channel')
             .then(res=>res.json())
             .then(data=>{
-                    setBackendData(data)
+                    setChannelList(data)
                 }
             )
     }, [])
 
-    const data = [backendData]
+    // const data = [backendData]
+    const data = [{
+        'id': '8218',
+        'comment_count': 0,
+        'cover': {
+            'images':['http://geek.itheima.net/resources/images/15.jpg'],
+        },
+        'like_count': 0,
+        'pubdate': '2022-03-11 09:00:00',
+        'read_count': 2,
+        'status': 2,
+        'title': 'wkwebview离线化加载h5资源解决方案'
+    }]
 
     const columns = [
         {
@@ -95,7 +104,6 @@ function Article () {
                 style={{ marginBottom: 20 }}
             >
                 <Form
-                    onFinish={onFinish}
                     initialValues={{ status: null }}>
                     <Form.Item label="Status" name="status">
                         <Radio.Group>
@@ -110,11 +118,15 @@ function Article () {
                     <Form.Item label="Channel" name="channel_id">
                         <Select
                             placeholder="Please select channel"
-                            defaultValue="lucy"
+                            defaultValue='Vue.js'
                             style={{ width: 120 }}
                         >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
+                            {(typeof channelList.channel_name==='undefined')?(<p>Loading...</p>):(
+                                channelList.channel_name.map(
+                                    (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
+                                )
+                            )}
+
                         </Select>
                     </Form.Item>
 

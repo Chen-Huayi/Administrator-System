@@ -1,0 +1,30 @@
+[
+    {
+        "channel_name": [
+            "Java",
+            "C/C++",
+            "Python",
+            "JavaScript",
+            "Go",
+            "HTML",
+            "CSS"
+        ]
+    },
+    {
+        "question" : "What frontend library was used to create this application?",
+        "answer" : "3",
+        "a1": "MongoDB",
+        "a2": "Express.js",
+        "a3": "React",
+        "a4": "Node.js"
+    },
+    {
+        "question" : "What is the capital of Canada?",
+        "answer" : "4",
+        "a1": "Toronto",
+        "a2": "Vancouver",
+        "a3": "Montreal",
+        "a4": "Ottawa"
+    }
+
+]

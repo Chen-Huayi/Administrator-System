@@ -1,4 +1,4 @@
-import {BrowserRouter, unstable_HistoryRouter as HistoryRouter, Route, Routes} from "react-router-dom";
+import {unstable_HistoryRouter as HistoryRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import {AuthComponent} from 'src/components/AuthComponent'
@@ -12,13 +12,13 @@ import { history } from 'src/utils/history'
 
 function App() {
     return (
-        <BrowserRouter>
+        <HistoryRouter history={history}>
             <div className="App">
                 <Routes>
                     <Route path='/' element={
-                        // <AuthComponent>
+                        <AuthComponent>
                             <Layout/>
-                        //</AuthComponent>
+                        </AuthComponent>
                     }>
 
                         <Route index element={<Home />}></Route>
@@ -26,10 +26,10 @@ function App() {
                         <Route path='publish' element={<Publish />}></Route>
 
                     </Route>
-                    {/*<Route path='/login' element={<Login></Login>}></Route>*/}
+                    <Route path='/login' element={<Login></Login>}></Route>
                 </Routes>
             </div>
-        </BrowserRouter>
+        </HistoryRouter>
     )
 }
 

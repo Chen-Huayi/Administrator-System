@@ -14,7 +14,7 @@ import 'react-quill/dist/quill.snow.css'
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.scss'
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {http} from "src/utils";
 import {observer} from "mobx-react-lite";
 import React from "react";
@@ -26,14 +26,27 @@ function Publish(){
     const {channelStore}=useStore()
 
     const [fileList, setFileList]=useState([])
+    const cacheImageList=useRef([])
     const onUploadChange=({fileList})=>{
-        console.log(fileList)
         setFileList(fileList)
+        cacheImageList.current=fileList
     }
 
     const [imgCount, setImgCount]=useState(1)
     const radioChange=(e)=>{
-        setImgCount(e.target.value)
+        const count=e.target.value
+        setImgCount(count)
+
+        if (cacheImageList.current.length===0){
+            return false
+        }
+
+        if (count===1){
+            const img=cacheImageList.current ?  cacheImageList.current[0]:[]
+            setFileList([img])
+        }else if (count===3){
+            setFileList(cacheImageList.current)
+        }
     }
 
 

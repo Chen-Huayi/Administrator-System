@@ -17,7 +17,7 @@
                 "id": 1,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2021-08-01 09:41:00",
@@ -29,7 +29,7 @@
                 "id": 2,
                 "comment_count": 10,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-01-11 05:20:00",
@@ -41,7 +41,7 @@
                 "id": 3,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-01-11 13:20:00",
@@ -53,7 +53,7 @@
                 "id": 4,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 80,
                 "pubdate": "2022-03-11 23:20:00",
@@ -65,7 +65,7 @@
                 "id": 5,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 9,
                 "pubdate": "2022-01-11 18:20:00",
@@ -77,7 +77,7 @@
                 "id": 6,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 45,
                 "pubdate": "2022-09-30 09:20:00",
@@ -89,7 +89,7 @@
                 "id": 7,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-04-21 09:20:00",
@@ -101,7 +101,7 @@
                 "id": 8,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2021-04-11 09:20:00",
@@ -113,7 +113,7 @@
                 "id": 9,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-05-13 08:20:00",
@@ -125,7 +125,7 @@
                 "id": 10,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2020-09-11 09:20:00",
@@ -137,7 +137,7 @@
                 "id": 11,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2018-06-11 09:20:00",
@@ -149,7 +149,7 @@
                 "id": 12,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-05-11 09:20:00",
@@ -161,7 +161,7 @@
                 "id": 13,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-07-11 09:20:00",
@@ -173,7 +173,7 @@
                 "id": 14,
                 "comment_count": 0,
                 "cover": {
-                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                    "images": ["http://geek.itheima.net/resources/images/15.jpg"]
                 },
                 "like_count": 0,
                 "pubdate": "2022-03-31 09:20:00",

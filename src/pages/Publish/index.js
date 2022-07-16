@@ -7,12 +7,13 @@ import {
     Input,
     Upload,
     Space,
-    Select
+    Select,
+    message
 } from 'antd'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { PlusOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import {Link, useSearchParams, useNavigate} from 'react-router-dom'
 import './index.scss'
 import {useEffect, useRef, useState} from "react";
 import {http} from "src/utils";
@@ -28,8 +29,16 @@ function Publish(){
     const [fileList, setFileList]=useState([])
     const cacheImageList=useRef([])
     const onUploadChange=({fileList})=>{
-        setFileList(fileList)
-        cacheImageList.current=fileList
+        const formatList=fileList.map(file=>{
+            if (file.response){
+                return {
+                    url: file.response.data.url
+                }
+            }
+            return file
+        })
+        setFileList(formatList)
+        cacheImageList.current=formatList
     }
 
     const [imgCount, setImgCount]=useState(1)
@@ -49,6 +58,9 @@ function Publish(){
         }
     }
 
+    const [params]=useSearchParams()
+    const id =params.get('id')
+    const navigate=useNavigate()
 
     const onFinish= async (value)=>{
         console.log(value)
@@ -60,14 +72,37 @@ function Publish(){
             type,
             cover: {
                 type: type,
-                images: fileList.map(item=>item.response.data.url)
+                images: fileList.map(item=>item.url)
             }
         }
-        console.log(params)
-        await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
 
+        if (id){
+            await http.put(`http://geek.itheima.net/v1_0/mp/articles/${id}?draft=false`, params)
+        }else {
+            await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
+        }
+
+        navigate('/article')
+        message.success(`Successfully ${id ? 'Update' : 'Upload'}`)
     }
 
+
+    const form=useRef(null)
+
+    useEffect(()=>{
+        const loadDetail=async ()=>{
+            const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
+            const data=res.data
+            form.current.setFieldsValue({...data, type: data.cover.type})
+
+            const formatImgList=data.cover.images.map(url=>({url}))
+            setFileList(formatImgList)
+            cacheImageList.current=formatImgList
+        }
+        if (id){
+            loadDetail()
+        }
+    }, [id])
 
 
     return (
@@ -78,7 +113,7 @@ function Publish(){
                         <Breadcrumb.Item>
                             <Link to="/home">Home</Link>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item>Publish</Breadcrumb.Item>
+                        <Breadcrumb.Item>{id ? 'Edit' : 'Publish'} Article</Breadcrumb.Item>
                     </Breadcrumb>
                 }
             >
@@ -87,6 +122,7 @@ function Publish(){
                     wrapperCol={{ span: 16 }}
                     initialValues={{ type: 1, content: 'This is content' }}
                     onFinish={onFinish}
+                    ref={form}
                 >
                     <Form.Item
                         label="Title"
@@ -152,7 +188,7 @@ function Publish(){
                     <Form.Item wrapperCol={{ offset: 4 }}>
                         <Space>
                             <Button size="large" type="primary" htmlType="submit">
-                                Upload
+                                {id ? 'Update' : 'Upload'}
                             </Button>
                         </Space>
                     </Form.Item>

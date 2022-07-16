@@ -8,16 +8,9 @@ class ChannelStore{
     }
 
     loadChannelList=async ()=>{
-        // const res = await http.get('/api/channel')
-        // console.log(res)
-        // console.log('----------------')
-        // console.log(this.channelList)
-        // this.channelList=res.data.channels
-        // console.log('?')
-        // console.log(this.channelList)
-
+        const res = await http.get('/api/channel')
+        this.channelList=res.channel_name
     }
-
 }
 
 export default ChannelStore

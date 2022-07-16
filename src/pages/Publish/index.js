@@ -18,21 +18,13 @@ import {useEffect, useState} from "react";
 import {http} from "src/utils";
 import {observer} from "mobx-react-lite";
 import React from "react";
+import {useStore} from "src/store";
 
 const { Option } = Select
 
 function Publish(){
 
-    const [channelList, setChannelList]=useState([])
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('/api/channel')
-            setChannelList(res)
-        }
-        loadList()
-    }, [])
-
-
+    const {channelStore}=useStore()
 
 
 
@@ -68,9 +60,9 @@ function Publish(){
                         rules={[{ required: true, message: 'Choose channel' }]}
                     >
                         <Select placeholder="Please choose channel" style={{ width: 400 }}>
-                            {(typeof channelList.channel_name==='undefined')?(<p>Loading...</p>):(
-                                channelList.channel_name.map(
-                                    (item, i)=>(<Option key={i} value={i}>{item}</Option>)
+                            {(typeof channelStore.channelList==='undefined')?(<p>Loading...</p>):(
+                                channelStore.channelList.map(
+                                    (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
                                 )
                             )}
                         </Select>

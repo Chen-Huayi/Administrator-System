@@ -8,6 +8,7 @@ import img404 from 'src/assets/5.jpg'
 import React, {useEffect, useState} from "react";
 import {http} from "src/utils";
 import {observer} from "mobx-react-lite";
+import {useStore} from "src/store";
 
 const { Option } = Select
 const { RangePicker } = DatePicker
@@ -32,7 +33,6 @@ function Article () {
     */
 
 
-    const [channelList, setChannelList]=useState([])
     const [article, setArticle]=useState({
         myList: [],
         myCount: 0
@@ -119,15 +119,7 @@ function Article () {
         }
     ]
 
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('/api/channel')
-            setChannelList(res)
-        }
-        loadList()
-    }, [])
-
-
+    const {channelStore}=useStore()
 
     useEffect(()=>{
         const loadList=async ()=> {
@@ -192,8 +184,8 @@ function Article () {
                             placeholder="Please select channel"
                             style={{ width: 120 }}
                         >
-                            {(typeof channelList.channel_name==='undefined')?(<p>Loading...</p>):(
-                                channelList.channel_name.map(
+                            {(typeof channelStore.channelList==='undefined')?(<p>Loading...</p>):(
+                                channelStore.channelList.map(
                                     (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
                                 )
                             )}

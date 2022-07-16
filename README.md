@@ -3,14 +3,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
-In the **server** directory, you can run:  
-**`npm run dev`**  
 
++ In the **server** directory, you can run: **`npm run dev`**  
 Runs the backend environment of app in the development mode.\
 Open [http://localhost:8000/api/](http://localhost:8000/api) to view it in your browser.
----
-In the **project** directory, you can run:  
-**`npm run start`**  
+
++ In the **project** directory, you can run: **`npm run start`**  
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 

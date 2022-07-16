@@ -5,7 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 + In the **server** directory, you can run:  
-**`npm install`**  
 **`npm install -g nodemon`**  
 **`npm run dev`**  
 Runs the backend environment of app in the development mode.\

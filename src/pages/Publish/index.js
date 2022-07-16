@@ -23,10 +23,37 @@ import {useStore} from "src/store";
 const { Option } = Select
 
 function Publish(){
-
     const {channelStore}=useStore()
 
+    const [fileList, setFileList]=useState([])
+    const onUploadChange=({fileList})=>{
+        console.log(fileList)
+        setFileList(fileList)
+    }
 
+    const [imgCount, setImgCount]=useState(1)
+    const radioChange=(e)=>{
+        setImgCount(e.target.value)
+    }
+
+
+    const onFinish= async (value)=>{
+        console.log(value)
+        const {channel_id, content, title, type}=value
+        const params={
+            channel_id,
+            content,
+            title,
+            type,
+            cover: {
+                type: type,
+                images: fileList.map(item=>item.response.data.url)
+            }
+        }
+        console.log(params)
+        await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
+
+    }
 
 
 
@@ -46,6 +73,7 @@ function Publish(){
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 16 }}
                     initialValues={{ type: 1, content: 'This is content' }}
+                    onFinish={onFinish}
                 >
                     <Form.Item
                         label="Title"
@@ -70,22 +98,31 @@ function Publish(){
 
                     <Form.Item label="Cover">
                         <Form.Item name="type">
-                            <Radio.Group>
+                            <Radio.Group onChange={radioChange}>
                                 <Radio value={1}>Single picture</Radio>
                                 <Radio value={3}>Triple pictures</Radio>
                                 <Radio value={0}>No picture</Radio>
                             </Radio.Group>
                         </Form.Item>
-                        <Upload
-                            name="image"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList
-                        >
-                            <div style={{ marginTop: 8 }}>
-                                <PlusOutlined />
-                            </div>
-                        </Upload>
+
+                        {imgCount>0 && (
+                            <Upload
+                                name="image"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList
+                                action="http://geek.itheima.net/v1_0/upload"
+                                fileList={fileList}
+                                onChange={onUploadChange}
+                                multiple={imgCount>1}
+                                maxCount={imgCount}
+                            >
+                                <div style={{ marginTop: 8 }}>
+                                    <PlusOutlined />
+                                </div>
+                            </Upload>
+                        )}
+
                     </Form.Item>
                     <Form.Item
                         label="Content"

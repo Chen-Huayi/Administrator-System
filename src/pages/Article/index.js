@@ -14,28 +14,14 @@ const { Option } = Select
 const { RangePicker } = DatePicker
 
 function Article () {
-    /*
-    const [articleList, setArticleList]=useState({
-        list: [],
-        count: 0
-    })
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
-            const { results, total_count } = res.data
-            setArticleList({
-                list: results,
-                count: total_count
-            })
-        }
-        loadList()
-    }, [params])
-    */
-
-
+    const {channelStore}=useStore()
     const [article, setArticle]=useState({
         myList: [],
         myCount: 0
+    })
+    const [articleList, setArticleList]=useState({
+        list: [],
+        count: 0
     })
     const [params, setParams] = useState({
         page: 1,
@@ -119,8 +105,17 @@ function Article () {
         }
     ]
 
-    const {channelStore}=useStore()
-
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
+            const { results, total_count } = res.data
+            setArticleList({
+                list: results,
+                count: total_count
+            })
+        }
+        loadList()
+    }, [params])
     useEffect(()=>{
         const loadList=async ()=> {
             const res = await http.get('/api/articles', {params})
@@ -144,8 +139,7 @@ function Article () {
         navigate(`/publish?id=${data.id}`)
     }
     const deleteArticle=async (data)=>{
-        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
-        await http.delete(`/api/articles/${data.id}`)
+        await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
         setParams({
             ...params,
             page: 1
@@ -203,17 +197,17 @@ function Article () {
                     </Form.Item>
                 </Form>
             </Card>
-            {/*<Card title={`${articleList.count} results after selecting:`}>*/}
-            <Card title={`${article.myCount} results after selecting:`}>
+            <Card title={`${articleList.count} results after selecting:`}>
+            {/*<Card title={`${article.myCount} results after selecting:`}>*/}
                 <Table
                     rowKey="id"
                     columns={columns}
-                    // dataSource={articleList.list}
-                    dataSource={article.myList}
+                    dataSource={articleList.list}
+                    // dataSource={article.myList}
                     pagination={{
                         pageSize: params.per_page,
-                        // total: articleList.count,
-                        total: article.myCount,
+                        total: articleList.count,
+                        // total: article.myCount,
                         onChange: pageChange
                     }}
                 />

@@ -13,12 +13,30 @@ const { Option } = Select
 const { RangePicker } = DatePicker
 
 function Article () {
-    const [channelList, setChannelList]=useState([])
+    /*
     const [articleList, setArticleList]=useState({
         list: [],
         count: 0
     })
-    const [article, setArticle]=useState([])
+    useEffect(() => {
+        const loadList=async ()=>{
+            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
+            const { results, total_count } = res.data
+            setArticleList({
+                list: results,
+                count: total_count
+            })
+        }
+        loadList()
+    }, [params])
+    */
+
+
+    const [channelList, setChannelList]=useState([])
+    const [article, setArticle]=useState({
+        myList: [],
+        myCount: 0
+    })
     const [params, setParams] = useState({
         page: 1,
         per_page: 10
@@ -26,19 +44,18 @@ function Article () {
     const onFinish=(values)=>{
         console.log(values)
 
-        const {id , date, status}=values
+        const {channel_id , date, status}=values
         const parameter={}
         if (status!==-1){
             parameter.status = status
         }
-        if (id){
-            parameter.id = id
+        if (channel_id){
+            parameter.channel_id = channel_id
         }
         if (date) {
             parameter.begin_pubdate = date[0].format('YYYY-MM-DD')
             parameter.end_pubdate = date[1].format('YYYY-MM-DD')
         }
-
         setParams({
             ...params, ...parameter
         })
@@ -49,7 +66,7 @@ function Article () {
             dataIndex: 'cover',
             width:120,
             render: cover => {
-                return <img src={cover || img404} width={80} height={60} alt="" />
+                return <img src={cover.images || img404}  width={80} height={60} alt="" />
             }
         },
         {
@@ -60,7 +77,7 @@ function Article () {
         {
             title: 'Status',
             dataIndex: 'status',
-            render: data => <Tag color="green">审核通过</Tag>
+            render: data => <Tag color="green">Verified</Tag>
         },
         {
             title: 'Publish Date',
@@ -102,15 +119,6 @@ function Article () {
         }
     ]
 
-    // const [channelList, setChannelList]=useState([])
-    // useEffect(()=>{
-    //     fetch('/api/channel')
-    //         .then(res=>res.json())
-    //         .then(data=>{
-    //                 setChannelList(data)
-    //             }
-    //         )
-    // }, [])
     useEffect(() => {
         const loadList=async ()=>{
             const res = await http.get('/api/channel')
@@ -121,32 +129,17 @@ function Article () {
 
 
 
-
-
-
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
-            // const res = await http.get('/api/articles', { params })
-            const { results, total_count } = res.data
-            setArticleList({
-                list: results,
-                count: total_count
+    useEffect(()=>{
+        const loadList=async ()=> {
+            const res = await http.get('/api/articles', {params})
+            const { articles, size } = res
+            setArticle({
+                myList: articles,
+                myCount: size
             })
         }
         loadList()
     }, [params])
-
-    useEffect(()=>{
-        const loadList=async ()=> {
-            const res = await http.get('/api/articles', {params})
-            setArticle(res)
-        }
-        loadList()
-    }, [params])
-
-
-
 
 
     const pageChange=(page)=>{
@@ -159,16 +152,13 @@ function Article () {
         navigate(`/publish?id=${data.id}`)
     }
     const deleteArticle=async (data)=>{
-        await http.delete(`/mp/articles/${data.id}`)
-        // delete(`/api/article/${data.id}`)
+        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
+        await http.delete(`/api/articles/${data.id}`)
         setParams({
             ...params,
             page: 1
         })
     }
-
-
-
 
 
     return (
@@ -221,18 +211,19 @@ function Article () {
                     </Form.Item>
                 </Form>
             </Card>
-            <Card title={`${articleList.count} results after selecting:`}>
+            {/*<Card title={`${articleList.count} results after selecting:`}>*/}
+            <Card title={`${article.myCount} results after selecting:`}>
                 <Table
                     rowKey="id"
                     columns={columns}
-                    dataSource={articleList.list}
-                    // dataSource={[article]}
+                    // dataSource={articleList.list}
+                    dataSource={article.myList}
                     pagination={{
                         pageSize: params.per_page,
-                        total: articleList.count,
+                        // total: articleList.count,
+                        total: article.myCount,
                         onChange: pageChange
                     }}
-
                 />
             </Card>
         </div>

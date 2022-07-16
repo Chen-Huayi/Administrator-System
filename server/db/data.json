@@ -11,20 +11,178 @@
         ]
     },
     {
-        "question" : "What frontend library was used to create this application?",
-        "answer" : "3",
-        "a1": "MongoDB",
-        "a2": "Express.js",
-        "a3": "React",
-        "a4": "Node.js"
-    },
-    {
-        "question" : "What is the capital of Canada?",
-        "answer" : "4",
-        "a1": "Toronto",
-        "a2": "Vancouver",
-        "a3": "Montreal",
-        "a4": "Ottawa"
+        "size": 14,
+        "articles": [
+            {
+                "id": 1,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2021-08-01 09:41:00",
+                "read_count": 2,
+                "status": 2,
+                "title": "test title 1"
+            },
+            {
+                "id": 2,
+                "comment_count": 10,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-01-11 05:20:00",
+                "read_count": 25,
+                "status": 2,
+                "title": "test title 2"
+            },
+            {
+                "id": 3,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-01-11 13:20:00",
+                "read_count": 27,
+                "status": 2,
+                "title": "test title 3"
+            },
+            {
+                "id": 4,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 80,
+                "pubdate": "2022-03-11 23:20:00",
+                "read_count": 2,
+                "status": 2,
+                "title": "test title 4"
+            },
+            {
+                "id": 5,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 9,
+                "pubdate": "2022-01-11 18:20:00",
+                "read_count": 255,
+                "status": 2,
+                "title": "test title 5"
+            },
+            {
+                "id": 6,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 45,
+                "pubdate": "2022-09-30 09:20:00",
+                "read_count": 25102,
+                "status": 2,
+                "title": "test title 6"
+            },
+            {
+                "id": 7,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-04-21 09:20:00",
+                "read_count": 96,
+                "status": 2,
+                "title": "test title 7"
+            },
+            {
+                "id": 8,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2021-04-11 09:20:00",
+                "read_count": 8,
+                "status": 2,
+                "title": "test title 8"
+            },
+            {
+                "id": 9,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-05-13 08:20:00",
+                "read_count": 0,
+                "status": 2,
+                "title": "test title 9"
+            },
+            {
+                "id": 10,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2020-09-11 09:20:00",
+                "read_count": 120,
+                "status": 2,
+                "title": "test title 10"
+            },
+            {
+                "id": 11,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2018-06-11 09:20:00",
+                "read_count": 87,
+                "status": 2,
+                "title": "test title 11"
+            },
+            {
+                "id": 12,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-05-11 09:20:00",
+                "read_count": 2,
+                "status": 2,
+                "title": "test title 12"
+            },
+            {
+                "id": 13,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-07-11 09:20:00",
+                "read_count": 2,
+                "status": 2,
+                "title": "test title 13"
+            },
+            {
+                "id": 14,
+                "comment_count": 0,
+                "cover": {
+                    "images": "http://geek.itheima.net/resources/images/15.jpg"
+                },
+                "like_count": 0,
+                "pubdate": "2022-03-31 09:20:00",
+                "read_count": 2,
+                "status": 2,
+                "title": "test title 14"
+            }
+
+        ]
     }
 
 ]

@@ -15,10 +15,14 @@ try {
         res.json(data[1])
     })
 
+    app.get("/api/frameworks", (req, res)=> {
+        res.json(data[2])
+    })
+
 } catch (err) {
     console.log(`Error reading file from disk: ${err}`);
 }
 
 app.listen(8000, ()=>{
-    console.log('start on port 8000')
+    console.log('Start on port 8000')
 })

@@ -2,14 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),
 allowing users to post and edit articles, and existing articles can be viewed and 
-filtered by channels and date in different interfaces. 
+filtered by channels and date in different interfaces.  
+
 ## Available Scripts
 
 + In the **server** directory, you can run:  
 **`npm install -g nodemon`**  
 **`npm run dev`**  
 Runs the backend environment of app in the development mode.\
-Open [http://localhost:8000/api/](http://localhost:8000/api) to view it in your browser.
+Open [http://localhost:8000/api/???](http://localhost:8000/api) to view it in your browser.
 
 + In the **project** directory, you can run:  
 **`npm install`**  

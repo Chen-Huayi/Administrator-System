@@ -1,7 +1,8 @@
 # React App Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),
+allowing users to post and edit articles, and existing articles can be viewed and 
+filtered by channels and date in different interfaces. 
 ## Available Scripts
 
 + In the **server** directory, you can run:  

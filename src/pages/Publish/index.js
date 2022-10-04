@@ -77,9 +77,11 @@ function Publish(){
         }
 
         if (id){
-            await http.put(`http://geek.itheima.net/v1_0/mp/articles/${id}?draft=false`, params)
+            // await http.put(`http://geek.itheima.net/v1_0/mp/articles/${id}?draft=false`, params)
+            await http.put(`/my/addArticle`, params)
         }else {
-            await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
+            // await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
+            await http.post(`/my/addArticle`, params)
         }
 
         navigate('/article')
@@ -91,7 +93,8 @@ function Publish(){
 
     useEffect(()=>{
         const loadDetail=async ()=>{
-            const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
+            // const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
+            const res=await http.get(`/my/addArticle`)
             const data=res.data
             form.current.setFieldsValue({...data, type: data.cover.type})
 

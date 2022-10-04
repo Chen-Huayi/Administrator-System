@@ -118,7 +118,7 @@ function Article () {
     }, [params])
     useEffect(()=>{
         const loadList=async ()=> {
-            const res = await http.get('/api/articles', {params})
+            const res = await http.get('/my/article', {params})
             const { articles, size } = res
             setArticle({
                 myList: articles,
@@ -197,17 +197,17 @@ function Article () {
                     </Form.Item>
                 </Form>
             </Card>
-            <Card title={`${articleList.count} results after selecting:`}>
-            {/*<Card title={`${article.myCount} results after selecting:`}>*/}
+            {/*<Card title={`${articleList.count} results after selecting:`}>*/}
+            <Card title={`${article.myCount} results after selecting:`}>
                 <Table
                     rowKey="id"
                     columns={columns}
-                    dataSource={articleList.list}
-                    // dataSource={article.myList}
+                    // dataSource={articleList.list}
+                    dataSource={article.myList}
                     pagination={{
                         pageSize: params.per_page,
-                        total: articleList.count,
-                        // total: article.myCount,
+                        // total: articleList.count,
+                        total: article.myCount,
                         onChange: pageChange
                     }}
                 />

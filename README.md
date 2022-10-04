@@ -10,7 +10,7 @@ filtered by channels and date in different interfaces.
 **`npm install -g nodemon`**  
 **`npm run dev`**  
 Runs the backend environment of app in the development mode.\
-Open [http://localhost:8000/api/???](http://localhost:8000/api) to view it in your browser.
+Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
 + In the **project** directory, you can run:  
 **`npm install`**  

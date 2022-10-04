@@ -47,3 +47,14 @@ exports.uploadArticle=(req, res)=>{
 
 }
 
+exports.deleteArticle=(req, res)=>{
+    const sql = `update articles set available=0 where id=?`
+
+    db.query(sql, req.params.id, (err, results)=>{
+        if (results.affectedRows!==1){
+            return res.send('GG')
+        }
+        res.send('ok')
+    })
+
+}

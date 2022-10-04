@@ -19,10 +19,10 @@ function Article () {
         myList: [],
         myCount: 0
     })
-    const [articleList, setArticleList]=useState({
-        list: [],
-        count: 0
-    })
+    // const [articleList, setArticleList]=useState({
+    //     list: [],
+    //     count: 0
+    // })
     const [params, setParams] = useState({
         page: 1,
         per_page: 10
@@ -105,17 +105,17 @@ function Article () {
         }
     ]
 
-    useEffect(() => {
-        const loadList=async ()=>{
-            const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
-            const { results, total_count } = res.data
-            setArticleList({
-                list: results,
-                count: total_count
-            })
-        }
-        loadList()
-    }, [params])
+    // useEffect(() => {
+    //     const loadList=async ()=>{
+    //         const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
+    //         const { results, total_count } = res.data
+    //         setArticleList({
+    //             list: results,
+    //             count: total_count
+    //         })
+    //     }
+    //     loadList()
+    // }, [params])
     useEffect(()=>{
         const loadList=async ()=> {
             const res = await http.get('/my/article', {params})
@@ -139,7 +139,8 @@ function Article () {
         navigate(`/publish?id=${data.id}`)
     }
     const deleteArticle=async (data)=>{
-        await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
+        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
+        await http.get(`/my/deleteArticle/${data.id}`)
         setParams({
             ...params,
             page: 1

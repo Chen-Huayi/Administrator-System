@@ -1,7 +1,7 @@
 const express=require('express')
 const fs = require('fs');
 const app=express()
-const channelRouter=require('./router/channelBox')
+// const channelRouter=require('./router/channelBox')
 const articleRouter=require('./router/articleBox')
 
 const cors = require('cors')
@@ -29,7 +29,7 @@ app.use(express.json())
     console.log(`Error reading file from disk: ${err}`);
 }*/
 
-app.use('/api', channelRouter)
+// app.use('/api', channelRouter)
 app.use('/my', articleRouter)
 
 

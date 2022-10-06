@@ -1,7 +1,7 @@
 const db = require('../db/index')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
-
+const bcrypt=require('bcryptjs')
 
 exports.login=(req, res)=>{
     const userinfo = req.body

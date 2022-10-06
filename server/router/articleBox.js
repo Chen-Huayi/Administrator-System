@@ -4,11 +4,15 @@ const router = express.Router()
 const articleHandler = require('../router_handler/articleHandler')
 
 // http://localhost:8000/my
-router.get('/article', articleHandler.showArticles)
+router.get('/article', articleHandler.listArticles)
 
-router.post('/addArticle', articleHandler.uploadArticle)
+router.get('/article/:id', articleHandler.getArticle)
 
-router.get('/deleteArticle/:id', articleHandler.deleteArticle)
+router.post('/add', articleHandler.uploadArticle)
+
+router.get('/delete/:id', articleHandler.deleteArticle)
+
+router.put('/article/:id', articleHandler.updateArticle)
 
 module.exports = router
 

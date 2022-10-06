@@ -63,7 +63,6 @@ function Publish(){
     const navigate=useNavigate()
 
     const onFinish= async (value)=>{
-        console.log(value)
         const {channel_id, content, title, type}=value
         const params={
             channel_id,
@@ -78,10 +77,10 @@ function Publish(){
 
         if (id){
             // await http.put(`http://geek.itheima.net/v1_0/mp/articles/${id}?draft=false`, params)
-            await http.put(`/my/addArticle`, params)
+            await http.put(`/my/article/${id}`, params)//从这开始
         }else {
             // await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
-            await http.post(`/my/addArticle`, params)
+            await http.post(`/my/add`, params)
         }
 
         navigate('/article')
@@ -94,8 +93,10 @@ function Publish(){
     useEffect(()=>{
         const loadDetail=async ()=>{
             // const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
-            const res=await http.get(`/my/addArticle`)
-            const data=res.data
+            const res=await http.get(`/my/article/${id}`)
+            // const data=res.data
+            const data=res.articles
+
             form.current.setFieldsValue({...data, type: data.cover.type})
 
             const formatImgList=data.cover.images.map(url=>({url}))
@@ -123,7 +124,7 @@ function Publish(){
                 <Form
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 16 }}
-                    initialValues={{ type: 1, content: 'This is content' }}
+                    initialValues={{ type: 1, content: '' }}
                     onFinish={onFinish}
                     ref={form}
                 >
@@ -163,7 +164,8 @@ function Publish(){
                                 listType="picture-card"
                                 className="avatar-uploader"
                                 showUploadList
-                                action="http://geek.itheima.net/v1_0/upload"
+                                // action="http://geek.itheima.net/v1_0/upload"
+                                action="http://localhost:8000/my/upload"
                                 fileList={fileList}
                                 onChange={onUploadChange}
                                 multiple={imgCount>1}

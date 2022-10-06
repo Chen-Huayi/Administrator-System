@@ -140,7 +140,7 @@ function Article () {
     }
     const deleteArticle=async (data)=>{
         // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
-        await http.get(`/my/deleteArticle/${data.id}`)
+        await http.get(`/my/delete/${data.id}`)
         setParams({
             ...params,
             page: 1

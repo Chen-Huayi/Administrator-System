@@ -1,6 +1,6 @@
 const db = require('../db/index')
 
-exports.showArticles=(req, res)=>{
+exports.listArticles=(req, res)=>{
     const sql=`select * from articles where available=1`
 
     db.query(sql, function (err, results) {
@@ -28,11 +28,39 @@ exports.showArticles=(req, res)=>{
     })
 }
 
+exports.getArticle=(req, res)=>{
+    //const sql=`select * from articles order by id limit ?,1`
+    const sql=`select * from articles where id=?`
+
+    db.query(sql, req.params.id, (err, results)=> {
+        const item = results[0]
+
+        const attributes={
+            id: item.id,
+            comment_count: item.comment_count,
+            cover: {
+                images: [item.cover_images]
+            },
+            like_count: item.like_count,
+            pubdate: item.pubdate,
+            read_count: item.read_count,
+            status: item.status,
+            title: item.title,
+            available: item.available
+        }
+
+        res.send({
+            articles: attributes
+        })
+    })
+
+}
+
 exports.uploadArticle=(req, res)=>{
     const sql = `insert into articles set ?`
 
     const articleInfo={
-        cover_images: '\''+req.body.cover.images+'\'',
+        cover_images: ''+req.body.cover.images,
         pubdate: new Date(),
         title: req.body.title,
         content: req.body.content
@@ -51,6 +79,19 @@ exports.deleteArticle=(req, res)=>{
     const sql = `update articles set available=0 where id=?`
 
     db.query(sql, req.params.id, (err, results)=>{
+        if (results.affectedRows!==1){
+            return res.send('GG')
+        }
+        res.send('ok')
+    })
+}
+
+exports.updateArticle=(req, res)=>{
+    //const sql=`update articles set ? where id=?`
+    const sql=`update articles set pubdate=?, title=?, content=?, cover_images=? where id=?`
+    const body=req.body
+
+    db.query(sql, [new Date(), body.title, body.content, body.cover.images, req.params.id], (err, results)=>{
         if (results.affectedRows!==1){
             return res.send('GG')
         }

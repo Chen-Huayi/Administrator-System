@@ -82,7 +82,7 @@ exports.uploadArticle=(req, res)=>{
 
     db.query(sql, articleInfo, (err, results)=>{
         if (results.affectedRows!==1){
-            return res.send('GG')
+            return res.msg('GG')
         }
         res.send('ok')
     })
@@ -94,7 +94,7 @@ exports.deleteArticle=(req, res)=>{
 
     db.query(sql, req.params.id, (err, results)=>{
         if (results.affectedRows!==1){
-            return res.send('GG')
+            return res.msg('GG')
         }
         res.send('ok')
     })
@@ -107,7 +107,7 @@ exports.updateArticle=(req, res)=>{
 
     db.query(sql, [new Date(), body.title, body.content, body.cover.images, req.params.id], (err, results)=>{
         if (results.affectedRows!==1){
-            return res.send('GG')
+            return res.msg('GG')
         }
         res.send('ok')
     })

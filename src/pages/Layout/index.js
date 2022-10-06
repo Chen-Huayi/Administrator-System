@@ -14,12 +14,12 @@ const { Header, Sider } = Layout
 
 function MyLayout () {
     const {pathname}=useLocation()
-    const {userStore, loginStore, channelStore}=useStore()
+    const {/*userStore,*/ loginStore, channelStore}=useStore()
 
     useEffect(()=>{
-        userStore.getUserInfo()
+        // userStore.getUserInfo()
         channelStore.loadChannelList()
-    }, [userStore, channelStore])
+    }, [/*userStore,*/ channelStore])
 
     const navigate=useNavigate()
     const onConfirm=()=>{
@@ -32,7 +32,7 @@ function MyLayout () {
             <Header className="header">
                 <div className="logo" />
                 <div className="user-info">
-                    <span className="user-name">{userStore.userInfo.name}</span>
+                    {/*<span className="user-name">{userStore.userInfo.name}</span>*/}
                     <span className="user-logout">
                         <Popconfirm
                             onConfirm={onConfirm}

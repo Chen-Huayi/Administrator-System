@@ -10,13 +10,18 @@ function Login() {
     const navigate=useNavigate()
 
     async function onFinished(values){
-        console.log(values)
         await loginStore.getToken({
             mobile: values.username,
             code: values.password
         })
+
         navigate('/', {replace: true})
-        message.success('Successfully login')
+
+        if (loginStore.token!==''){
+            message.success('Successfully login')
+        }else {
+            message.error('Login failure')
+        }
     }
 
     function onFinishedFailed(err){
@@ -32,8 +37,8 @@ function Login() {
                 <Form
                     initialValues={{
                         remember: true,
-                        mobile: 12345678900,
-                        code: 246810
+                        // mobile: 12345678900,
+                        // code: 246810
                     }}
                     onFinish={onFinished}
                     onFinishFailed={onFinishedFailed}
@@ -44,18 +49,18 @@ function Login() {
                         name="username"
                         rules={[
                             {
-                                pattern: /^1[3-9]\d{9}$/,
-                                message: '手机号码格式不对',
+                                // pattern: /^1[3-9]\d{9}$/,
+                                // message: '手机号码格式不对',
                                 validateTrigger: 'onBlur'
                             },
                             {
                                 required: true,
-                                message: '请输入手机号',
+                                message: 'Username required',
                                 validateTrigger: 'onBlur'
                             },
                         ]}
                     >
-                        <Input size="large" placeholder="Enter phone number" />
+                        <Input size="large" placeholder="Enter username" />
                     </Form.Item>
 
                     <Form.Item
@@ -63,17 +68,17 @@ function Login() {
                         name="password"
                         rules={[
                             {
-                                len: 6,
-                                message: '验证码6个字符',
+                                len: 8,
+                                message: 'Need 8 character password',
                                 validateTrigger: 'onBlur'
                             },
                             {
                                 required: true,
-                                message: '请输入验证码'
+                                message: 'Password required'
                             }
                         ]}
                     >
-                        <Input size="large" placeholder="Verify code" maxLength={6} />
+                        <Input size="large" placeholder="Password" maxLength={8} />
                     </Form.Item>
 
                     <Form.Item name="remember" valuePropName="checked">

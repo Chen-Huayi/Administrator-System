@@ -1,5 +1,5 @@
 import {Card, Form, Input, Button, Checkbox, message} from "antd";
-import logo from 'src/assets/1.jpg'
+import logo from 'src/assets/login_logo.jpg'
 import './index.scss'
 import {useNavigate} from 'react-router-dom'
 import {useStore} from "src/store";
@@ -28,11 +28,15 @@ function Login() {
         console.log('Failed: ', err)
     }
 
+    function register(){
+        // TODO
+        console.log('666')
+    }
+
     return (
         <div className="login">
             <Card className="login-container">
                 <img className="login-logo" src={logo} alt="" />
-                {/* form */}
 
                 <Form
                     initialValues={{
@@ -69,7 +73,7 @@ function Login() {
                         rules={[
                             {
                                 len: 8,
-                                message: 'Need 8 character password',
+                                // message: 'Need 8 character password',
                                 validateTrigger: 'onBlur'
                             },
                             {
@@ -83,16 +87,25 @@ function Login() {
 
                     <Form.Item name="remember" valuePropName="checked">
                         <Checkbox className="login-checkbox-label">
-                            I agree「xxxx」and「xxxx」
+                            I agree the terms and conditions
                         </Checkbox>
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" size="large" block>
-                            Login
-                        </Button>
+                        <div className="submit-button">
+                            <Button type="primary" htmlType="submit" size="middle" shape="round" style={{width : '100px'}}>
+                                Log in
+                            </Button>
+                        </div>
+
                     </Form.Item>
                 </Form>
+
+                <div className="register-button">
+                    <Button type="primary" htmlType="submit" size="middle" shape="round" style={{width : '100px'}} onClick={register}>
+                        Sign up
+                    </Button>
+                </div>
 
             </Card>
         </div>

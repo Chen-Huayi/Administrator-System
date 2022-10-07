@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import { Table, Tag, Space, Card, Breadcrumb, Form, Button, Radio, DatePicker, Select } from 'antd'
 import locale from 'antd/es/date-picker/locale/en_US'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import img404 from 'src/assets/5.jpg'
+import img404 from 'src/assets/404.jpg'
 import {http} from "src/utils";
 import {useStore} from "src/store";
 import './index.scss'

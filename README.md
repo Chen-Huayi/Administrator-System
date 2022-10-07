@@ -7,7 +7,7 @@ filtered by channels and date in different interfaces.
 ## Available Scripts
 
 + In the **server** directory, you can run:  
-**`npm install -g nodemon`**  
+**`npm install`**  
 **`npm run dev`**  
 Runs the backend environment of app in the development mode.\
 Open [http://localhost:8000](http://localhost:8000) to view it in your browser.

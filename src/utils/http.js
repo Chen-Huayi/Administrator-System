@@ -4,7 +4,7 @@ import {history} from "src/utils/history";
 
 const http = axios.create({
     // baseURL: 'http://geek.itheima.net/v1_0',
-    baseURL: 'http://my-azure-server.mysql.database.azure.com:3000',
+    baseURL: 'http://localhost:3000',
     timeout: 5000
 })
 // 添加请求拦截器

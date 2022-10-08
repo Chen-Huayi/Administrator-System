@@ -1,9 +1,8 @@
 import {Button, Card, Checkbox, Form, Input, message} from "antd";
-import logo from 'src/assets/login_logo.jpg'
-import './index.scss'
+import logo from 'assets/login_logo.jpg'
 import {useNavigate} from 'react-router-dom'
-import {useStore} from "src/store";
-
+import {useStore} from "store";
+import './index.scss'
 
 function Login() {
     const {loginStore}=useStore()

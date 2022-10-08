@@ -2,9 +2,9 @@ import {Layout, Menu, Popconfirm} from 'antd'
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
 import {DiffOutlined, EditOutlined, HomeOutlined, LogoutOutlined} from '@ant-design/icons'
-import './index.scss'
-import {useStore} from 'src/store'
+import {useStore} from 'store'
 import {useEffect} from "react";
+import './index.scss'
 
 const { Header, Sider } = Layout
 

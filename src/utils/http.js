@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {getToken} from "src/utils/token";
-import {history} from "src/utils/history";
+import {getToken} from "utils/token";
+import {history} from "utils/history";
 
 const http = axios.create({
     // baseURL: 'http://geek.itheima.net/v1_0',

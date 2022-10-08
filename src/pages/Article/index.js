@@ -4,10 +4,10 @@ import React, {useEffect, useState} from "react";
 import {Breadcrumb, Button, Card, DatePicker, Form, Radio, Select, Space, Table, Tag} from 'antd'
 import locale from 'antd/es/date-picker/locale/en_US'
 import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
-import img404 from 'src/assets/404.jpg'
-import {http} from "src/utils";
-import {useStore} from "src/store";
-import './index.scss'
+import img404 from 'assets/404.jpg'
+import {http} from "utils";
+import {useStore} from "store";
+import 'index.scss'
 
 const { Option } = Select
 const { RangePicker } = DatePicker

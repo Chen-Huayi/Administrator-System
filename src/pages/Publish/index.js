@@ -3,11 +3,11 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import {PlusOutlined} from '@ant-design/icons'
 import {Link, useNavigate, useSearchParams} from 'react-router-dom'
-import './index.scss'
 import React, {useEffect, useRef, useState} from "react";
-import {http} from "src/utils";
+import {http} from "utils";
 import {observer} from "mobx-react-lite";
-import {useStore} from "src/store";
+import {useStore} from "store";
+import './index.scss'
 
 const { Option } = Select
 

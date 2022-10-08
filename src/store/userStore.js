@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {http} from "src/utils";
+import {http} from "utils";
 
 class UserStore {
     userInfo={}

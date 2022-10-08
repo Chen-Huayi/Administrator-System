@@ -1,4 +1,4 @@
-import {Card, Form, Input, Button, Checkbox, message} from "antd";
+import {Button, Card, Checkbox, Form, Input, message} from "antd";
 import logo from 'src/assets/login_logo.jpg'
 import './index.scss'
 import {useNavigate} from 'react-router-dom'

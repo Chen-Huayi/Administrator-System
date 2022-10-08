@@ -1,24 +1,12 @@
-import {
-    Card,
-    Breadcrumb,
-    Form,
-    Button,
-    Radio,
-    Input,
-    Upload,
-    Space,
-    Select,
-    message
-} from 'antd'
+import {Breadcrumb, Button, Card, Form, Input, message, Radio, Select, Space, Upload} from 'antd'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { PlusOutlined } from '@ant-design/icons'
-import {Link, useSearchParams, useNavigate} from 'react-router-dom'
+import {PlusOutlined} from '@ant-design/icons'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 import './index.scss'
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {http} from "src/utils";
 import {observer} from "mobx-react-lite";
-import React from "react";
 import {useStore} from "src/store";
 
 const { Option } = Select

@@ -1,10 +1,9 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
-// import 'moment/locale/zh-cn'
-import { Table, Tag, Space, Card, Breadcrumb, Form, Button, Radio, DatePicker, Select } from 'antd'
+import {Breadcrumb, Button, Card, DatePicker, Form, Radio, Select, Space, Table, Tag} from 'antd'
 import locale from 'antd/es/date-picker/locale/en_US'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
 import img404 from 'src/assets/404.jpg'
 import {http} from "src/utils";
 import {useStore} from "src/store";

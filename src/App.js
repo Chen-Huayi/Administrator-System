@@ -1,13 +1,12 @@
-import {unstable_HistoryRouter as HistoryRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from "react-router-dom";
+import {AuthComponent} from 'src/components/AuthComponent'
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
-import {AuthComponent} from 'src/components/AuthComponent'
-
 import './App.css'
 import Publish from "./pages/Publish";
 import Article from "./pages/Article";
 import Home from "./pages/Home";
-import { history } from 'src/utils/history'
+import {history} from 'src/utils/history'
 
 
 function App() {

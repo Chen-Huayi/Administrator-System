@@ -1,4 +1,3 @@
-// import Bar from "src/components/Bar";
 import Bar from "components/Bar";
 
 function Home (){

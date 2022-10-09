@@ -19,7 +19,7 @@ function Login() {
         if (loginStore.token!==''){
             message.success('Successfully login')
         }else {
-            message.error('Login failure')
+            message.error('Invalid username or password')
         }
     }
 
@@ -28,8 +28,7 @@ function Login() {
     }
 
     function register(){
-        // TODO
-        console.log('666')
+        navigate('/register')
     }
 
     return (
@@ -71,7 +70,8 @@ function Login() {
                         name="password"
                         rules={[
                             {
-                                len: 8,
+                                min: 6,
+                                // len: 8,
                                 // message: 'Need 8 character password',
                                 validateTrigger: 'onBlur'
                             },
@@ -81,7 +81,7 @@ function Login() {
                             }
                         ]}
                     >
-                        <Input size="large" placeholder="Password" maxLength={8} />
+                        <Input size="large" placeholder="Password" maxLength={16} />
                     </Form.Item>
 
                     <Form.Item name="remember" valuePropName="checked">
@@ -92,7 +92,7 @@ function Login() {
 
                     <Form.Item>
                         <div className="submit-button">
-                            <Button type="primary" htmlType="submit" size="middle" shape="round" style={{width : '100px'}}>
+                            <Button type="primary" htmlType="submit" size="large" shape="round" style={{width : '100px'}}>
                                 Log in
                             </Button>
                         </div>
@@ -101,7 +101,7 @@ function Login() {
                 </Form>
 
                 <div className="register-button">
-                    <Button type="primary" htmlType="submit" size="middle" shape="round" style={{width : '100px'}} onClick={register}>
+                    <Button type="primary" htmlType="submit" size="large" shape="round" style={{width : '100px'}} onClick={register}>
                         Sign up
                     </Button>
                 </div>

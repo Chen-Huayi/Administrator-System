@@ -2,6 +2,7 @@ import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from "react-rout
 import {AuthComponent} from 'components/AuthComponent'
 import './App.css'
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Publish from "./pages/Publish";
@@ -19,13 +20,12 @@ function App() {
                             <Layout/>
                         </AuthComponent>
                     }>
-
                         <Route index element={<Home />}></Route>
                         <Route path='article' element={<Article />}></Route>
                         <Route path='publish' element={<Publish />}></Route>
-
                     </Route>
-                    <Route path='/login' element={<Login></Login>}></Route>
+                    <Route path='/login' element={<Login/>}></Route>
+                    <Route path='/register' element={<Register/>}></Route>
                 </Routes>
             </div>
         </HistoryRouter>

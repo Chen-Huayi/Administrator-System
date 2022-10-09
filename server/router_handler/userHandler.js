@@ -35,6 +35,33 @@ exports.login=(req, res)=>{
 
 }
 
+exports.register=(req, res)=>{
+    const userinfo = req.body
+    const sql = `select * from users where username=?`
+
+    db.query(sql, [userinfo.username], (err, results)=>{
+        if (results.length > 0) {
+            return res.msg('User name is occupied!')
+        }
+
+        const sql=`insert into users set ?`
+        db.query(sql, {
+            username: userinfo.username,
+            password: userinfo.password,
+            email: userinfo.email,
+            phone: '+'+userinfo.prefix+' '+userinfo.phone,
+            gender: userinfo.gender
+        }, (err, results)=>{
+            if (results.affectedRows !== 1) {
+                return res.msg('Register failure')
+            }
+            res.msg('Register successfully!', 0)
+        })
+
+    })
+
+}
+
 exports.profile=(req, res)=>{
     const sql=`select username from login_history`
 

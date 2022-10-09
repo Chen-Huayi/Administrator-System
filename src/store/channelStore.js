@@ -7,7 +7,7 @@ class ChannelStore{
         makeAutoObservable(this)
     }
 
-    loadChannelList=async ()=>{
+    loadChannelList = async ()=>{
         const res = await http.get('/my/channel')
         this.channelList=res.channel_name
     }

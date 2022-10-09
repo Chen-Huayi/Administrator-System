@@ -46,14 +46,14 @@ app.use((req, res, next)=>{
 app.use('/api', userRouter)
 app.use('/my', articleRouter)
 
-app.use((err, req, res, next)=>{
-    if (err instanceof joi.ValidationError){  // 验证失败导致的错误
-        return res.msg(err)
-    }
-    if (err.name === 'UnauthorizedError')  // 错误中间件
-        return res.msg('身份认证失败!')
-    res.msg(err)  // Unknown error
-})
+// app.use((err, req, res, next)=>{
+//     if (err instanceof joi.ValidationError){  // 验证失败导致的错误
+//         return res.msg(err)
+//     }
+//     if (err.name === 'UnauthorizedError')  // 错误中间件
+//         return res.msg('身份认证失败!')
+//     res.msg(err)  // Unknown error
+// })
 
 app.listen(8000, ()=>{
     console.log('api server running at http://localhost:8000')

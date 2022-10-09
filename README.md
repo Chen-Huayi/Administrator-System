@@ -4,7 +4,7 @@
 Continually updated...
 
 ## Core Features
-+ Create account
++ Creating administrator account
 + User login
 + Update user profile
 + View any article that posted in the backstage

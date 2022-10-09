@@ -1,9 +1,9 @@
 # Article Management System
 
-### Introduction
+## Introduction
 Continually updated...
 
-### Core Features
+## Core Features
 + Create account
 + User login
 + Update user profile
@@ -13,13 +13,13 @@ Continually updated...
 + Upload your own articles
 + View like, dislike, or read count
 
-### Languages and Tools
+## Languages and Tools
 + **Frontend**: React
 + **Backend**: Node.js (Express)
 + **Database**: Azure Database for MySQL
 + **Tools**: WebStorm, Postman, MySQL Workbench, Navicat
 
-### How to run
+## How to run
 + In **/backend** directory:
   1. install: `npm install`
   2. run: `npm run server`
@@ -27,7 +27,7 @@ Continually updated...
   1. install:  `npm install`
   2. run: `npm run start`
 
-### Preview Images
+## Preview Images
 ![](/img/login.png)
 ![](/img/register.png)
 ![](/img/content-manager.png)

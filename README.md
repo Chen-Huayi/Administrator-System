@@ -4,14 +4,14 @@
 Continually updated...
 
 ## Core Features
-+ Creating administrator account
-+ User login
-+ Update user profile
-+ View any article that posted in the backstage
-  + Edit articles
-  + Delete articles
-+ Upload your own articles
-+ View like, dislike, or read count
++ [x] Creating administrator account &check;
++ [x] User login &check;
++ [ ] Update user profile
++ [x] View any article that posted in the backstage &check;
+  + [x] Edit articles &check;
+  + [x] Delete articles &check;
++ [x] Upload your own articles &check;
++ [ ] View like, dislike, or read count
 
 ## Languages and Tools
 + **Frontend**: React

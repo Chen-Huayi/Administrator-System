@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 // const fs = require("fs");
 
-// 创建数据库连接对象
+// Create a database connection object
 const db = mysql.createConnection({
     host: "my-azure-server.mysql.database.azure.com",
     user: "chenhuayi",

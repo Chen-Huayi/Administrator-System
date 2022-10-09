@@ -1,76 +1,34 @@
-# React App Demo
+# Article Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),
-allowing users to post and edit articles, and existing articles can be viewed and 
-filtered by channels and date in different interfaces.  
+### Introduction
+Continually updated...
 
-## Available Scripts
+### Core Features
++ Create account
++ User login
++ Update user profile
++ View any article that posted in the backstage
+  + Edit articles
+  + Delete articles
++ Upload your own articles
++ View like, dislike, or read count
 
-Run **`npm install`** in both
-+ **/package.json**
-+ **/server/package.json**
+### Languages and Tools
++ **Frontend**: React
++ **Backend**: Node.js (Express)
++ **Database**: Azure Database for MySQL
++ **Tools**: WebStorm, Postman, MySQL Workbench, Navicat
 
+### How to run
++ In **/backend** directory:
+  1. install: `npm install`
+  2. run: `npm run server`
++ In **/frontend** directory:
+  1. install:  `npm install`
+  2. run: `npm run start`
 
-[//]: # (---)
-
-[//]: # (### `npm test`)
-[//]: # (Launches the test runner in the interactive watch mode.)
-[//]: # (See the section about [running tests]&#40;https://facebook.github.io/create-react-app/docs/running-tests&#41; for more information.)
-
-[//]: # (### `npm run build`)
-[//]: # ()
-[//]: # (Builds the app for production to the `build` folder. )
-[//]: # (It correctly bundles React in production mode and optimizes the build for the best performance.)
-
-[//]: # ()
-[//]: # (The build is minified and the filenames include the hashes.)
-
-[//]: # (Your app is ready to be deployed!)
-
-[//]: # ()
-[//]: # (See the section about [deployment]&#40;https://facebook.github.io/create-react-app/docs/deployment&#41; for more information.)
-
-[//]: # ()
-[//]: # (## Learn More)
-
-[//]: # ()
-[//]: # (You can learn more in the [Create React App documentation]&#40;https://facebook.github.io/create-react-app/docs/getting-started&#41;.)
-
-[//]: # ()
-[//]: # (To learn React, check out the [React documentation]&#40;https://reactjs.org/&#41;.)
-
-[//]: # ()
-[//]: # (### Code Splitting)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting]&#40;https://facebook.github.io/create-react-app/docs/code-splitting&#41;)
-
-[//]: # ()
-[//]: # (### Analyzing the Bundle Size)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size]&#40;https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size&#41;)
-
-[//]: # ()
-[//]: # (### Making a Progressive Web App)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app]&#40;https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app&#41;)
-
-[//]: # ()
-[//]: # (### Advanced Configuration)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration]&#40;https://facebook.github.io/create-react-app/docs/advanced-configuration&#41;)
-
-[//]: # ()
-[//]: # (### Deployment)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment]&#40;https://facebook.github.io/create-react-app/docs/deployment&#41;)
-
-[//]: # ()
-[//]: # (### `npm run build` fails to minify)
-
-[//]: # ()
-[//]: # (This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify]&#40;https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify&#41;)
+### Preview Images
+![](/img/login.png)
+![](/img/register.png)
+![](/img/content-manager.png)
+![](/img/publish.png)

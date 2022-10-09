@@ -4,13 +4,13 @@
 Continually updated...
 
 ## Core Features
-+ [x] Creating administrator account &check;
-+ [x] User login &check;
++ [x] Creating administrator account ✅
++ [x] User login ✅
 + [ ] Update user profile
-+ [x] View any article that posted in the backstage &check;
-  + [x] Edit articles &check;
-  + [x] Delete articles &check;
-+ [x] Upload your own articles &check;
++ [x] View any article that posted in the backstage ✅
+  + [x] Edit articles ✅
+  + [x] Delete articles ✅
++ [x] Upload your own articles ✅
 + [ ] View like, dislike, or read count
 
 ## Languages and Tools

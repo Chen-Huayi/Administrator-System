@@ -25,7 +25,7 @@ Continually updated...✅
   2. run: `npm run server`
 + In **/frontend** directory:
   1. install:  `npm install`
-  2. run: `npm run start`
+  2. run: `npm run app`
 
 ## Preview Images
 ![](/img/login.png)

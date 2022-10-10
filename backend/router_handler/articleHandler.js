@@ -1,4 +1,4 @@
-const db = require('../db/index')
+const db = require('../server')
 
 exports.showChannels=(req, res)=>{
     const sql=`select * from channels`

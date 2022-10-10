@@ -19,8 +19,8 @@ exports.login=(req, res)=>{
 
         const user = { ...results[0], password: ''}
 
-        const sql=`insert into login_history (username) values (?)`
-        db.query(sql, userinfo.mobile, (err2, results2)=>{})
+        const sql=`insert into login_history (username, email) values (?, ?)`
+        db.query(sql, [user.username, user.email])
 
         const tokenStr = jwt.sign(
             user,
@@ -29,6 +29,7 @@ exports.login=(req, res)=>{
         )
         res.send({
             status: 0,
+            username: userinfo.mobile,
             token: 'Bearer '+tokenStr
         })
     })
@@ -63,7 +64,7 @@ exports.register=(req, res)=>{
 }
 
 exports.profile=(req, res)=>{
-    const sql=`select username from login_history`
+    const sql=`select * from login_history`
 
     db.query(sql, (err, results)=>{
         if (err){
@@ -73,14 +74,15 @@ exports.profile=(req, res)=>{
             return res.msg('Load profile failure')
         }
         res.send({
-            name: results[0].username
+            name: results[0].username,
+            email: results[0].email
         })
     })
 
 }
 
 exports.exit=(req, res)=>{
-    const sql=`delete from login_history`
+    const sql=`delete from login_history where id=1`
 
     db.query(sql, (err)=>{
         if (err){

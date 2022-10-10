@@ -105,7 +105,7 @@ function Publish(){
                         <Breadcrumb.Item>
                             <Link to="/home">Home</Link>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item>{id ? 'Edit' : 'Publish'} Article</Breadcrumb.Item>
+                        <Breadcrumb.Item>{id ? 'Edit' : 'Publish'}</Breadcrumb.Item>
                     </Breadcrumb>
                 }
             >

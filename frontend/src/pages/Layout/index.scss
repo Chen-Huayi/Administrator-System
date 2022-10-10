@@ -3,13 +3,15 @@
 }
 
 .header {
+  height: 65px;
   padding: 0;
+  background: #a9a9a9;
 }
 
 .logo {
   width: 200px;
-  height: 60px;
-  background: url("~/src/assets/logo.jpg") no-repeat center / 160px auto;
+  height: 70px;
+  background: url("~/src/assets/navigation.png") no-repeat center / 50px auto;
 }
 
 .layout-content {
@@ -21,10 +23,12 @@
   right: 0;
   top: 0;
   padding-right: 20px;
-  color: #fff;
+  color: black;
+  font-size: large;
+  font-weight: bold;
 
   .user-name {
-    margin-right: 20px;
+    margin-right: 100px;
   }
 
   .user-logout {
@@ -36,3 +40,14 @@
 .ant-layout-header {
   padding: 0 !important;
 }
+
+img{
+  width: 200px;
+}
+
+.ant-layout-sider-trigger {
+  height: 60px;
+  color: #000;
+  background: #eeeeee;
+}
+

@@ -155,7 +155,7 @@ function Article () {
                         <Breadcrumb.Item>
                             <Link to="/home">Home</Link>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item>Content Manager</Breadcrumb.Item>
+                        <Breadcrumb.Item>Content</Breadcrumb.Item>
                     </Breadcrumb>
                 }
                 style={{ marginBottom: 20 }}

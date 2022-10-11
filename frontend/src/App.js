@@ -8,7 +8,8 @@ import Layout from "./pages/Layout";
 import Publish from "./pages/Publish";
 import Article from "./pages/Article";
 import {history} from 'utils/history'
-
+import Update from './pages/Update/password'
+import UserInfo from './pages/Update/userInfo'
 
 function App() {
     return (
@@ -23,9 +24,11 @@ function App() {
                         <Route index element={<Home />}></Route>
                         <Route path='article' element={<Article />}></Route>
                         <Route path='publish' element={<Publish />}></Route>
+                        <Route path='update-profile' element={<UserInfo />}></Route>
                     </Route>
                     <Route path='/login' element={<Login/>}></Route>
                     <Route path='/register' element={<Register/>}></Route>
+                    <Route path='/reset-pwd' element={<Update />}></Route>
                 </Routes>
             </div>
         </HistoryRouter>

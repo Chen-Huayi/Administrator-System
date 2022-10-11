@@ -1,13 +1,13 @@
-import {Layout, Menu, Popconfirm} from 'antd'
+import {Button, Layout, Menu, Popconfirm, Dropdown, Space} from 'antd'
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
 import {
-    DiffOutlined,
+    DiffOutlined, DownOutlined,
     EditOutlined,
     HomeOutlined,
     LogoutOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined
+    MenuUnfoldOutlined, SettingFilled, SettingTwoTone
 } from '@ant-design/icons'
 import {useStore} from 'store'
 import React, {useEffect, useState} from "react";
@@ -17,6 +17,7 @@ const { Header, Sider } = Layout
 
 function MyLayout () {
     const {pathname}=useLocation()
+    const navigate=useNavigate()
     const {userStore, loginStore, channelStore}=useStore()
     const [collapsed, setCollapsed] = useState(false);
 
@@ -25,12 +26,28 @@ function MyLayout () {
         channelStore.loadChannelList()
     }, [userStore, channelStore])
 
-    const navigate=useNavigate()
+    const updateProfile=()=>{
+        navigate('/update-profile')
+    }
+
+    const resetPwd=()=>{
+        navigate('/reset-pwd')
+    }
+
     const onConfirm=()=>{
         loginStore.logOut()
         userStore.clearUserInfo()
         navigate('/login')
     }
+
+    const menu = (
+        <Menu
+            items={[
+                {label: <a onClick={updateProfile}>Update profile</a>},
+                {label: <a onClick={resetPwd}>Reset password</a>}
+            ]}
+        />
+    );
 
     return (
         <Layout>
@@ -39,6 +56,13 @@ function MyLayout () {
                 <div className="user-info">
                     <span className="user-profile">{userStore.userInfo.name}</span>
                     <span className="user-profile">{userStore.userInfo.email}</span>
+                    <span className="user-profile">
+                        <Dropdown overlay={menu} trigger={['click']}>
+                            <a onClick={(e) => e.preventDefault()}>
+                                <SettingFilled/>
+                            </a>
+                        </Dropdown>
+                    </span>
                     <span className="user-logout">
                         <Popconfirm
                             onConfirm={onConfirm}

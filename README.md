@@ -20,15 +20,30 @@ Continually updated...✅
 + **Tools**: WebStorm, Postman, MySQL Workbench, Navicat
 
 ## How to Run ▶️
-+ In **/backend** directory:
-  1. install: `npm install`
-  2. run: `npm run server`
-+ In **/frontend** directory:
-  1. install:  `npm install`
-  2. run: `npm run app`
+**Clone**
+```shell
+git clone https://github.com/Chen-Huayi/Administrator-System.git
+```
+**Install**
+```shell
+cd Administrator-System/backend
+npm install
+cd ../frontend
+npm install
+cd ..
+```
+**Run**
++ In `/backend` directory: 
+```shell
+npm run server
+```
++ In `/frontend` directory: 
+```shell
+npm run app
+```
 
 ## Preview Images
 ![](/img/login.png)
-![](/img/register.png)
-![](/img/content-manager.png)
-![](/img/publish.png)
+[//]: # (![]&#40;/img/register.png&#41;)
+[//]: # (![]&#40;/img/content-manager.png&#41;)
+[//]: # (![]&#40;/img/publish.png&#41;)

@@ -1,5 +1,5 @@
 {
-  "name": "article-management-server",
+  "name": "administrator-system-server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

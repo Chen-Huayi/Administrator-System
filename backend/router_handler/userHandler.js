@@ -18,9 +18,10 @@ exports.login=(req, res)=>{
             return res.msg('Wrong password!')
 
         const user = { ...results[0], password: ''}
+        const {password, ...rest}=user
 
-        const sql=`insert into login_history (username, email) values (?, ?)`
-        db.query(sql, [user.username, user.email])
+        const sql=`insert into login_history set ?`
+        db.query(sql, rest)
 
         const tokenStr = jwt.sign(
             user,
@@ -94,7 +95,55 @@ exports.exit=(req, res)=>{
 }
 
 exports.updateUserInfo=(req, res)=>{
-    // console.log(req)
+    const updateDB = (res, newInfo, id) => {
+        const sql =`update users set ? where id=?`
+
+        db.query(sql, [newInfo, id], (err, results)=>{
+            if (results.affectedRows !== 1)
+                return res.msg('Fail to update!')
+
+            const sql =`update login_history set ? where id=1`
+            db.query(sql, newInfo)
+        })
+        res.msg('Update successfully!', 0)   // Update successfully
+    }
+
+    const sql=`select username from login_history`
+
+    db.query(sql, (err, results)=>{
+        if (results.length !== 1)
+            return res.msg('User does not exist!')
+
+        const sql=`select * from users where username=?`
+
+        db.query(sql, results[0].username, (err, results)=>{
+            const updateReq = req.body
+            const {prefix, ...rest} = updateReq
+            const newInfo = updateReq.phone ? {...rest, phone: '+'+updateReq.prefix+' '+updateReq.phone} : {...rest}
+            const id = results[0].id
+            console.log(newInfo)
+            console.log(id)
+
+            //**************************************************************
+            if (Object.keys(newInfo).length===0){
+                return res.msg('You never make any change!', 0)
+            }
+
+            if (newInfo.username){
+                const sql = `select * from users where username=?`
+                db.query(sql, newInfo.username, (err, results)=>{
+                    if (results.length > 0) {
+                        return res.msg('User name is occupied!')
+                    }
+                    updateDB(res, newInfo, id)
+                })
+            }else {
+                updateDB(res, newInfo, id)
+            }
+
+        })
+
+    })
 
 }
 

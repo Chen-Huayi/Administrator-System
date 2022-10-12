@@ -7,6 +7,10 @@ class UpdateStore{
         makeAutoObservable(this)
     }
 
+    updateUserInfo = async (values)=>{
+        this.updateForm = await http.post('/api/updateinfo', values)
+    }
+
     updatePassword = async (values)=>{
         this.updateForm = await http.post('/api/updatepwd', values)
     }

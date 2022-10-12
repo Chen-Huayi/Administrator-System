@@ -1,81 +1,137 @@
-import { Button, Form, Input, InputNumber } from 'antd';
+import {Button, Form, Input, InputNumber, message, Select} from 'antd';
 import React from 'react';
+import {Option} from "antd/es/mentions";
+import './userInfo.scss'
+import {useStore} from "../../store";
+import {useNavigate} from "react-router-dom";
+
 const layout = {
     labelCol: {
         span: 8,
     },
     wrapperCol: {
-        span: 16,
+        span: 9,
     },
 };
-/* eslint-disable no-template-curly-in-string */
-
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-    },
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
-};
-/* eslint-enable no-template-curly-in-string */
 
 const UserInfo = () => {
-    const onFinish = (values) => {
-        console.log(values);
-    };
+    const {userStore, loginStore, channelStore, updateStore}=useStore()
+    const navigate=useNavigate()
+
+
+    const prefixSelector = (
+        <Form.Item name="prefix" noStyle>
+            <Select style={{width: 70}}>
+                <Option value="1">+1</Option>
+                <Option value="86">+86</Option>
+            </Select>
+        </Form.Item>
+    )
+
+    const onFinished = async (values) => {
+        await updateStore.updateUserInfo(values)
+        const updateInfo = updateStore.updateForm
+
+        console.log(updateInfo);
+        if (updateInfo.status!==1){
+            navigate('/')
+            window.location.reload()
+            message.success(updateInfo.message)
+        }else {
+            message.error(updateInfo.message)
+        }
+
+    }
+
+    const onFinishedFailed = (err) =>{
+        console.log('Failed: ', err)
+    }
 
     return (
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-            <Form.Item
-                name={['user', 'name']}
-                label="Name"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
+        <div className="update-userinfo">
+            <div className="update-userinfo-header">
+                Update Your Information
+            </div>
+            <Form {...layout}
+                  name="nest-messages"
+                  onFinish={onFinished}
+                  onFinishFailed={onFinishedFailed}
+                  initialValues={{
+                      prefix: '1',
+                  }}
             >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name={['user', 'email']}
-                label="Email"
-                rules={[
-                    {
-                        type: 'email',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name={['user', 'age']}
-                label="Age"
-                rules={[
-                    {
-                        type: 'number',
-                        min: 0,
-                        max: 99,
-                    },
-                ]}
-            >
-                <InputNumber />
-            </Form.Item>
-            <Form.Item name={['user', 'website']} label="Website">
-                <Input />
-            </Form.Item>
-            <Form.Item name={['user', 'introduction']} label="Introduction">
-                <Input.TextArea />
-            </Form.Item>
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item
+                    name="username"
+                    label="Username"
+                    rules={[
+                        // {
+                        //     required: true,
+                        //     message: 'Please input your new username!',
+                        // },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                        {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        // {
+                        //     required: true,
+                        //     message: 'Please input your E-mail!',
+                        // },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="phone"
+                    label="Phone Number"
+                    rules={[
+                        // {
+                        //     required: true,
+                        //     message: 'Please input your phone number!',
+                        // },
+                    ]}
+                >
+                    <Input
+                        addonBefore={prefixSelector}
+                        style={{
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    name="gender"
+                    label="Gender"
+                    rules={[
+                        // {
+                        //     required: true,
+                        //     message: 'Please select gender!',
+                        // },
+                    ]}
+                >
+                    <Select placeholder="select your gender">
+                        <Option value="male">Male</Option>
+                        <Option value="female">Female</Option>
+                        <Option value="other">Other</Option>
+                    </Select>
+                </Form.Item>
+
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                    <Button type="primary" htmlType="submit" shape="round" size="large">
+                        Submit
+                    </Button>
+                </Form.Item>
+            </Form>
+        </div>
     );
 };
 

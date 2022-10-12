@@ -6,7 +6,7 @@ Continually updated...✅
 ## Core Features
 + [x] Creating administrator account 
 + [x] User login 
-+ [ ] Update user profile
++ [x] Update user profile
 + [x] View any article that posted in the backstage 
   + [x] Edit articles 
   + [x] Delete articles 

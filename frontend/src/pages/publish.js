@@ -7,7 +7,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {http} from "utils";
 import {observer} from "mobx-react-lite";
 import {useStore} from "store";
-import './index.scss'
+import '../styles/publish.scss'
 
 const { Option } = Select
 

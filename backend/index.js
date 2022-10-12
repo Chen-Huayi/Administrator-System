@@ -5,7 +5,7 @@ const joi = require('joi')
 const cors = require('cors')
 const config = require('./utils/config')
 const expressJWT = require('express-jwt')
-const userRouter=require('./router/user')
+const accountRouter=require('./router/account')
 const articleRouter=require('./router/article')
 
 app.use(cors())
@@ -25,7 +25,7 @@ app.use((req, res, next)=>{
 })
 
 // app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
-app.use('/api', userRouter)
+app.use('/api', accountRouter)
 app.use('/my', articleRouter)
 
 app.use((err, req, res, next)=>{

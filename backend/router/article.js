@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const articleHandler = require('../router_handler/articleHandler')
+const articleHandler = require('../router_handler/article-handler')
 
 // http://localhost:8000/my
 router.get('/channel', articleHandler.showChannels)

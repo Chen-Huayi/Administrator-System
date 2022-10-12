@@ -1,8 +1,8 @@
 import {Button, Form, Input, InputNumber, message, Select} from 'antd';
 import React from 'react';
 import {Option} from "antd/es/mentions";
-import './userInfo.scss'
-import {useStore} from "../../store";
+import '../styles/update-profile.scss'
+import {useStore} from "../store";
 import {useNavigate} from "react-router-dom";
 
 const layout = {
@@ -15,7 +15,7 @@ const layout = {
 };
 
 const UserInfo = () => {
-    const {userStore, loginStore, channelStore, updateStore}=useStore()
+    const {updateStore}=useStore()
     const navigate=useNavigate()
 
 

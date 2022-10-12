@@ -1,5 +1,5 @@
-import {Button, Card, Form, Input, InputNumber} from 'antd';
-import React from 'react';
+import {Button, Card, Form, Input, InputNumber, message} from 'antd';
+import React, {useEffect, useState} from 'react';
 import {useStore} from "store";
 import {useNavigate} from "react-router-dom";
 import './password.scss'
@@ -17,10 +17,21 @@ const layout = {
 const ChangePassword = () => {
     const {updateStore}=useStore()
     const navigate=useNavigate()
+    const [form] = Form.useForm();
 
-    const onFinished = (values) => {
-        console.log(values);
+    const onFinished = async (values) => {
+        await updateStore.updatePassword(values)
+        const updatePwd = updateStore.updateForm
+
+        if (updatePwd.status!==1){
+            navigate('/')
+            message.success(`Reset password successfully!`)
+        }else {
+            form.resetFields();
+            message.error(updatePwd.message)
+        }
     }
+
     const onFinishedFailed = (err) =>{
         console.log('Failed: ', err)
     }
@@ -32,12 +43,13 @@ const ChangePassword = () => {
             </div>
             <Form
                 {...layout}
+                form={form}
                 name="nest-messages"
                 onFinish={onFinished}
                 onFinishFailed={onFinishedFailed}
             >
                 <Form.Item
-                    name="old-password"
+                    name="old_password"
                     label="Old Password"
                     rules={[
                         {

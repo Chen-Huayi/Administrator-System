@@ -122,7 +122,6 @@ const Register = () => {
             navigate('/')
             message.success(`Register successfully!`)
         }else {
-            navigate('/register')
             message.error(registerInfo.message)
         }
 

@@ -92,3 +92,38 @@ exports.exit=(req, res)=>{
     })
 
 }
+
+exports.updateUserInfo=(req, res)=>{
+    // console.log(req)
+
+}
+
+exports.updatePassword=(req, res)=>{
+    // console.log(req.body)
+    const oldPassword=req.body.old_password
+    const newPassword=req.body.password
+    const sql=`select username from login_history`
+
+    db.query(sql, (err, results)=>{
+        if (results.length !== 1)
+            return res.msg('User does not exist!')
+
+        const username=results[0].username
+        const sql=`select * from users where username=?`
+
+        db.query(sql, username, (err, results)=>{
+            if (oldPassword!==results[0].password)
+                return res.msg('The old password is wrong!')
+
+            const sql=`update users set password=? where username=?`
+
+            db.query(sql, [newPassword, username], (err, results)=>{
+                if (results.affectedRows !== 1)
+                    return res.msg('Fail to update password!')
+                res.msg('Reset password successfully!', 0)
+            })
+
+        })
+
+    })
+}

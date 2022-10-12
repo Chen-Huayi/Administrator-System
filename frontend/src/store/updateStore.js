@@ -8,8 +8,7 @@ class UpdateStore{
     }
 
     updatePassword = async (values)=>{
-        this.updateForm = await http.post('/my/updatepwd', values)
-
+        this.updateForm = await http.post('/api/updatepwd', values)
     }
 
 }

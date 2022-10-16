@@ -20,18 +20,17 @@ Continually updated...✅
 + **Tools**: WebStorm, Postman, MySQL Workbench, Navicat
 
 ## How to Run ▶️
-**Clone**
-```shell
-git clone https://github.com/Chen-Huayi/Administrator-System.git
-```
 **Install**
 ```shell
+# clone 
+git clone https://github.com/Chen-Huayi/Administrator-System.git
+# install dependencies
 cd Administrator-System/backend
 npm install
 cd ../frontend
 npm install
-cd ..
 ```
+
 **Run**
 + In `/backend` directory: 
 ```shell

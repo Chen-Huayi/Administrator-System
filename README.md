@@ -38,6 +38,6 @@ npm run app
 
 ## Preview Images
 ![](/img/login.png)
-[//]: # (![]&#40;/img/register.png&#41;)
-[//]: # (![]&#40;/img/content-manager.png&#41;)
-[//]: # (![]&#40;/img/publish.png&#41;)
+![](/img/register.png)
+![](/img/content-manager.png)
+![](/img/publish.png)

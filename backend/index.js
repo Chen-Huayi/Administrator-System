@@ -23,7 +23,7 @@ app.use((req, res, next)=>{
     next()
 })
 
-app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
+// app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
 app.use('/api', accountRouter)
 app.use('/my', articleRouter)
 

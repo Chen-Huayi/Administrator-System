@@ -1,10 +1,11 @@
 const joi=require('joi')
 
-const username=joi.string().alphanum().min(3).max(12).required()
+const username= joi.string().alphanum().min(3).max(12)
 const password=joi.string().pattern(/^[\S]{6,12}$/).required()
-const id=joi.number().integer().min(1).required()
-const email=joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required()
-const phone=joi.string().min(10).max(11).required()
+const email= joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+const prefix= joi.number().integer().min(1).max(150)
+const phone= joi.string().min(10).max(11)
+const gender= joi.string()
 
 exports.login={
     body: {
@@ -15,20 +16,23 @@ exports.login={
 
 exports.register={
     body: {
-        email,
-        username,
+        email: email.required(),
+        username: username.required(),
         password,
         confirm: joi.ref('password'),
-        prefix: joi.number().integer().min(1).max(150),
-        phone,
-        gender: joi.string()
+        prefix: prefix.required(),
+        phone: phone.required(),
+        gender: gender.required()
     }
 }
 
 exports.update_userinfo={
     body: {
         username,
-        email
+        email,
+        prefix,
+        phone,
+        gender
     }
 }
 

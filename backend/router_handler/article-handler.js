@@ -75,7 +75,7 @@ exports.uploadArticle=(req, res)=>{
 
     const articleInfo={
         cover_images: ''+req.body.cover.images,
-        pubdate: new Date(),
+        pubdate: new Date().toLocaleString(),
         title: req.body.title,
         content: req.body.content
     }
@@ -105,7 +105,7 @@ exports.updateArticle=(req, res)=>{
     const sql=`update articles set pubdate=?, title=?, content=?, cover_images=? where id=?`
     const body=req.body
 
-    db.query(sql, [new Date(), body.title, body.content, body.cover.images, req.params.id], (err, results)=>{
+    db.query(sql, [new Date().toLocaleString(), body.title, body.content, body.cover.images, req.params.id], (err, results)=>{
         if (results.affectedRows!==1){
             return res.msg('GG')
         }

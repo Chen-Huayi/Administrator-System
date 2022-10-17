@@ -76,14 +76,17 @@ exports.profile=(req, res)=>{
         }
         res.send({
             name: results[0].username,
-            email: results[0].email
+            email: results[0].email,
+            prefix: results[0].phone.split(' ')[0],
+            phone: results[0].phone.split(' ')[1],
+            gender: results[0].gender
         })
     })
 
 }
 
 exports.exit=(req, res)=>{
-    const sql=`delete from login_history where id=1`
+    const sql=`delete from login_history`
 
     db.query(sql, (err)=>{
         if (err){
@@ -115,14 +118,14 @@ exports.updateUserInfo=(req, res)=>{
             return res.msg('User does not exist!')
 
         const sql=`select * from users where username=?`
+        const currentUsername=results[0].username
 
         db.query(sql, results[0].username, (err, results)=>{
             const updateReq = req.body
             const {prefix, ...rest} = updateReq
             const newInfo = updateReq.phone ? {...rest, phone: '+'+updateReq.prefix+' '+updateReq.phone} : {...rest}
             const id = results[0].id
-            console.log(newInfo)
-            console.log(id)
+            console.log('update: ->', newInfo, id)
 
             //**************************************************************
             if (Object.keys(newInfo).length===0){
@@ -132,7 +135,7 @@ exports.updateUserInfo=(req, res)=>{
             if (newInfo.username){
                 const sql = `select * from users where username=?`
                 db.query(sql, newInfo.username, (err, results)=>{
-                    if (results.length > 0) {
+                    if (results.length > 0 && currentUsername!==newInfo.username) {
                         return res.msg('User name is occupied!')
                     }
                     updateDB(res, newInfo, id)

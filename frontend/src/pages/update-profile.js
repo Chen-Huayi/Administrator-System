@@ -1,9 +1,10 @@
-import {Button, Form, Input, InputNumber, message, Select} from 'antd';
-import React from 'react';
+import {Button, Form, Input, message, Select} from 'antd';
+import React, {useEffect, useRef} from 'react';
 import {Option} from "antd/es/mentions";
 import '../styles/update-profile.scss'
 import {useStore} from "../store";
 import {useNavigate} from "react-router-dom";
+import {http} from "../utils";
 
 const layout = {
     labelCol: {
@@ -17,7 +18,7 @@ const layout = {
 const UserInfo = () => {
     const {updateStore}=useStore()
     const navigate=useNavigate()
-
+    const form=useRef(null)
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -32,7 +33,6 @@ const UserInfo = () => {
         await updateStore.updateUserInfo(values)
         const updateInfo = updateStore.updateForm
 
-        console.log(updateInfo);
         if (updateInfo.status!==1){
             navigate('/')
             window.location.reload()
@@ -40,34 +40,50 @@ const UserInfo = () => {
         }else {
             message.error(updateInfo.message)
         }
-
     }
 
     const onFinishedFailed = (err) =>{
         console.log('Failed: ', err)
     }
 
+    useEffect(()=>{
+        const loadDetail=async ()=>{
+            const res=await http.get('/api/profile')
+
+            form.current.setFieldsValue({
+                username: res.name,
+                email: res.email,
+                prefix: res.prefix,
+                phone: res.phone,
+                gender: res.gender
+            })
+        }
+        loadDetail()
+    }, [])
+
     return (
         <div className="update-userinfo">
             <div className="update-userinfo-header">
                 Update Your Information
             </div>
-            <Form {...layout}
-                  name="nest-messages"
-                  onFinish={onFinished}
-                  onFinishFailed={onFinishedFailed}
-                  initialValues={{
-                      prefix: '1',
-                  }}
+            <Form
+                {...layout}
+                name="nest-messages"
+                onFinish={onFinished}
+                onFinishFailed={onFinishedFailed}
+                ref={form}
+                initialValues={{
+                    prefix: '1',
+                }}
             >
                 <Form.Item
                     name="username"
                     label="Username"
                     rules={[
-                        // {
-                        //     required: true,
-                        //     message: 'Please input your new username!',
-                        // },
+                        {
+                            required: true,
+                            message: 'Please input your new username!',
+                        },
                     ]}
                 >
                     <Input />
@@ -81,10 +97,10 @@ const UserInfo = () => {
                             type: 'email',
                             message: 'The input is not valid E-mail!',
                         },
-                        // {
-                        //     required: true,
-                        //     message: 'Please input your E-mail!',
-                        // },
+                        {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                        },
                     ]}
                 >
                     <Input />
@@ -94,10 +110,10 @@ const UserInfo = () => {
                     name="phone"
                     label="Phone Number"
                     rules={[
-                        // {
-                        //     required: true,
-                        //     message: 'Please input your phone number!',
-                        // },
+                        {
+                            required: true,
+                            message: 'Please input your phone number!',
+                        },
                     ]}
                 >
                     <Input
@@ -112,10 +128,10 @@ const UserInfo = () => {
                     name="gender"
                     label="Gender"
                     rules={[
-                        // {
-                        //     required: true,
-                        //     message: 'Please select gender!',
-                        // },
+                        {
+                            required: true,
+                            message: 'Please select gender!',
+                        },
                     ]}
                 >
                     <Select placeholder="select your gender">

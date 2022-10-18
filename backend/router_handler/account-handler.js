@@ -1,6 +1,6 @@
-const db = require('../db-server')
+const db = require('../db/server')
 const jwt = require('jsonwebtoken')
-const config = require('../utils/config')
+const config = require('../config')
 const bcrypt=require('bcryptjs')
 
 exports.login=(req, res)=>{

@@ -3,9 +3,18 @@ const router = express.Router()
 const expressJoi = require('@escook/express-joi')
 const {get_article, add_article, update_article, delete_article} = require('../schema/article-schema')
 const articleHandler = require('../router_handler/article-handler')
+const fs = require("fs");
+const channelPath ='./db/channels.json'
 
 // http://localhost:8000/my
-router.get('/channel', articleHandler.showChannels)
+try {
+    const file = fs.readFileSync(channelPath, 'utf8');
+    const channelList = JSON.parse(file);
+    router.get('/channel', (req, res)=> {res.json(channelList)})
+    // router.get('/channel', articleHandler.showChannels)
+}catch (err){
+    console.log(`Error reading file from disk: ${err}`);
+}
 
 router.get('/article', articleHandler.listArticles)
 

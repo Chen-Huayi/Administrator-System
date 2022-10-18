@@ -13,9 +13,16 @@ const { Option } = Select
 
 function Publish(){
     const {channelStore}=useStore()
-
+    const [channels, setChannels]=useState([])
     const [fileList, setFileList]=useState([])
+    const [imgCount, setImgCount]=useState(1)
     const cacheImageList=useRef([])
+    const [params]=useSearchParams()
+    const id =params.get('id')
+    const navigate=useNavigate()
+    const form=useRef(null)
+
+
     const onUploadChange=({fileList})=>{
         const formatList=fileList.map(file=>{
             if (file.response){
@@ -29,7 +36,7 @@ function Publish(){
         cacheImageList.current=formatList
     }
 
-    const [imgCount, setImgCount]=useState(1)
+
     const radioChange=(e)=>{
         const count=e.target.value
         setImgCount(count)
@@ -46,9 +53,6 @@ function Publish(){
         }
     }
 
-    const [params]=useSearchParams()
-    const id =params.get('id')
-    const navigate=useNavigate()
 
     const onFinish= async (value)=>{
         const {channel_id, content, title, type}=value
@@ -76,8 +80,6 @@ function Publish(){
     }
 
 
-    const form=useRef(null)
-
     useEffect(()=>{
         const loadDetail=async ()=>{
             // const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
@@ -95,6 +97,13 @@ function Publish(){
             loadDetail()
         }
     }, [id])
+
+
+    useEffect(()=>{
+        setChannels(channelStore.channelList.map((channel, i)=>(
+            <Option key={i} value={i}>{channel}</Option>
+        )))
+    }, [])
 
 
     return (
@@ -129,11 +138,7 @@ function Publish(){
                         rules={[{ required: true, message: 'Choose channel' }]}
                     >
                         <Select placeholder="Please choose channel" style={{ width: 400 }}>
-                            {(typeof channelStore.channelList==='undefined')?(<p>Loading...</p>):(
-                                channelStore.channelList.map(
-                                    (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
-                                )
-                            )}
+                            {channels}
                         </Select>
                     </Form.Item>
 

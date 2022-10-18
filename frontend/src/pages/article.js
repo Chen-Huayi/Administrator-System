@@ -14,18 +14,18 @@ const { RangePicker } = DatePicker
 
 function Article () {
     const {channelStore}=useStore()
-    const [article, setArticle]=useState({
-        myList: [],
-        myCount: 0
+    const [channels, setChannels]=useState([])
+    const [articleList, setArticleList]=useState({
+        list: [],
+        count: 0
     })
-    // const [articleList, setArticleList]=useState({
-    //     list: [],
-    //     count: 0
-    // })
     const [params, setParams] = useState({
         page: 1,
         per_page: 10
     })
+    const navigate=useNavigate()
+
+
     const onFinish=(values)=>{
         console.log(values)
 
@@ -45,6 +45,30 @@ function Article () {
             ...params, ...parameter
         })
     }
+
+
+    const pageChange=(page)=>{
+        setParams({
+            ...params, page
+        })
+    }
+
+
+    const publishArticle=(data)=>{
+        navigate(`/publish?id=${data.id}`)
+    }
+
+
+    const deleteArticle=async (data)=>{
+        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
+        await http.get(`/my/delete/${data.id}`)
+        setParams({
+            ...params,
+            page: 1
+        })
+    }
+
+
     const columns = [
         {
             title: 'Cover',
@@ -104,47 +128,27 @@ function Article () {
         }
     ]
 
-    // useEffect(() => {
-    //     const loadList=async ()=>{
-    //         const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
-    //         const { results, total_count } = res.data
-    //         setArticleList({
-    //             list: results,
-    //             count: total_count
-    //         })
-    //     }
-    //     loadList()
-    // }, [params])
-    useEffect(()=>{
-        const loadList=async ()=> {
+
+    useEffect(() => {
+        const loadList=async ()=>{
+            // const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
+            // const { results, total_count } = res.data
             const res = await http.get('/my/article', {params})
             const { articles, size } = res
-            setArticle({
-                myList: articles,
-                myCount: size
+            setArticleList({
+                list: articles,
+                count: size
             })
         }
         loadList()
     }, [params])
 
 
-    const pageChange=(page)=>{
-        setParams({
-            ...params, page
-        })
-    }
-    const navigate=useNavigate()
-    const publishArticle=(data)=>{
-        navigate(`/publish?id=${data.id}`)
-    }
-    const deleteArticle=async (data)=>{
-        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
-        await http.get(`/my/delete/${data.id}`)
-        setParams({
-            ...params,
-            page: 1
-        })
-    }
+    useEffect(()=>{
+        setChannels(channelStore.channelList.map((channel, i)=>(
+            <Option key={i} value={i}>{channel}</Option>
+        )))
+    }, [])
 
 
     return (
@@ -178,11 +182,7 @@ function Article () {
                             placeholder="Please select channel"
                             style={{ width: 120 }}
                         >
-                            {(typeof channelStore.channelList==='undefined')?(<p>Loading...</p>):(
-                                channelStore.channelList.map(
-                                    (channel, i)=>(<Option key={i} value={i}>{channel}</Option>)
-                                )
-                            )}
+                            {channels}
                         </Select>
                     </Form.Item>
 
@@ -197,17 +197,14 @@ function Article () {
                     </Form.Item>
                 </Form>
             </Card>
-            {/*<Card title={`${articleList.count} results after selecting:`}>*/}
-            <Card title={`${article.myCount} results after selecting:`}>
+            <Card title={`${articleList.count} results after selecting:`}>
                 <Table
                     rowKey="id"
                     columns={columns}
-                    // dataSource={articleList.list}
-                    dataSource={article.myList}
+                    dataSource={articleList.list}
                     pagination={{
                         pageSize: params.per_page,
-                        // total: articleList.count,
-                        total: article.myCount,
+                        total: articleList.count,
                         onChange: pageChange
                     }}
                 />

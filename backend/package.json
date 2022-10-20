@@ -1,32 +1,32 @@
 {
-  "name": "administrator-system-server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "server": "nodemon index.js",
-    "test": "jest"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@escook/express-joi": "^1.1.1",
-    "@jest/globals": "^29.2.1",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "express-jwt": "^5.3.3",
-    "joi": "^17.6.2",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
-    "jest": "^29.2.1",
-    "nodemon": "^2.0.19",
-    "supertest": "^6.3.0"
-  },
-  "description": ""
+    "name": "administrator-system-server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon index.js",
+        "test": "jest"
+    },
+    "jest": {
+        "testEnvironment": "node"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@escook/express-joi": "^1.1.1",
+        "@jest/globals": "^29.2.1",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "express-jwt": "^5.3.3",
+        "joi": "^17.6.2",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "jest": "^29.2.1",
+        "nodemon": "^2.0.19",
+        "supertest": "^6.3.0"
+    },
+    "description": ""
 }

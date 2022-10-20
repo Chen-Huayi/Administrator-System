@@ -1,5 +1,5 @@
-import {Button, Card, Form, Input, InputNumber, message} from 'antd';
-import React, {useEffect, useState} from 'react';
+import {Button, Form, Input, message} from 'antd';
+import React from 'react';
 import {useStore} from "store";
 import {useNavigate} from "react-router-dom";
 import './reset-password.scss'

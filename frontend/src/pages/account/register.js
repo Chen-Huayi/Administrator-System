@@ -1,16 +1,5 @@
-import {
-    AutoComplete,
-    Button, Card,
-    Cascader,
-    Checkbox,
-    Col,
-    Form,
-    Input,
-    InputNumber, message,
-    Row,
-    Select
-} from 'antd'
-import React, { useState } from 'react'
+import {Button, Card, Cascader, Checkbox, Form, Input, message, Select} from 'antd'
+import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import './register.scss'
 import {useStore} from 'store';

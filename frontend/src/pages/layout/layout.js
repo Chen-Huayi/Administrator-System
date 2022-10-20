@@ -1,14 +1,7 @@
-import {Button, Layout, Menu, Popconfirm, Dropdown, Space} from 'antd'
+import {Dropdown, Layout, Menu, Popconfirm} from 'antd'
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
-import {
-    DiffOutlined, DownOutlined,
-    EditOutlined,
-    HomeOutlined,
-    LogoutOutlined,
-    MenuFoldOutlined,
-    MenuUnfoldOutlined, SettingFilled, SettingTwoTone
-} from '@ant-design/icons'
+import {DiffOutlined, EditOutlined, HomeOutlined, LogoutOutlined, SettingFilled} from '@ant-design/icons'
 import {useStore} from 'store'
 import React, {useEffect, useState} from "react";
 import './layout.scss'
@@ -43,8 +36,12 @@ function MyLayout () {
     const menu = (
         <Menu
             items={[
-                {label: <a onClick={updateProfile}>Update profile</a>},
-                {label: <a onClick={resetPwd}>Reset password</a>}
+                {
+                    label: <button onClick={updateProfile} style={{width: "120px"}}>Update profile</button>
+                },
+                {
+                    label: <button onClick={resetPwd} style={{width: "120px"}}>Reset password</button>
+                }
             ]}
         />
     );
@@ -58,7 +55,7 @@ function MyLayout () {
                     <span className="user-profile">{userStore.userInfo.email}</span>
                     <span className="user-profile">
                         <Dropdown overlay={menu} trigger={['click']}>
-                            <a onClick={(e) => e.preventDefault()}>
+                            <a onClick={(e) => e.preventDefault()} >
                                 <SettingFilled/>
                             </a>
                         </Dropdown>

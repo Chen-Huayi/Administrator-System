@@ -7,7 +7,7 @@ import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
 import img404 from 'assets/404.jpg'
 import {http} from "utils";
 import {useStore} from "store";
-import '../styles/article.scss'
+import './article.scss'
 
 const { Option } = Select
 const { RangePicker } = DatePicker

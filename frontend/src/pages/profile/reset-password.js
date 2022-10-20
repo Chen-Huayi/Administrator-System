@@ -2,7 +2,7 @@ import {Button, Card, Form, Input, InputNumber, message} from 'antd';
 import React, {useEffect, useState} from 'react';
 import {useStore} from "store";
 import {useNavigate} from "react-router-dom";
-import '../styles/reset-password.scss'
+import './reset-password.scss'
 
 const layout = {
     labelCol: {

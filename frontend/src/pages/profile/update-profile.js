@@ -1,10 +1,10 @@
 import {Button, Form, Input, message, Select} from 'antd';
 import React, {useEffect, useRef} from 'react';
 import {Option} from "antd/es/mentions";
-import '../styles/update-profile.scss'
-import {useStore} from "../store";
+import './update-profile.scss'
+import {useStore} from "../../store";
 import {useNavigate} from "react-router-dom";
-import {http} from "../utils";
+import {http} from "../../utils";
 
 const layout = {
     labelCol: {

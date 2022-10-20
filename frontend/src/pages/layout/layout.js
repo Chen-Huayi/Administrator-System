@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 import {useStore} from 'store'
 import React, {useEffect, useState} from "react";
-import '../styles/layout.scss'
+import './layout.scss'
 
 const { Header, Sider } = Layout
 

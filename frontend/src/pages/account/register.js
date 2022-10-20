@@ -12,7 +12,7 @@ import {
 } from 'antd'
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import '../styles/register.scss'
+import './register.scss'
 import {useStore} from 'store';
 
 const { Option } = Select
@@ -393,7 +393,7 @@ const Register = () => {
                         {...tailFormItemLayout}
                     >
                         <Checkbox>
-                            I have read the <a href="pages/register#">agreement</a>
+                            I have read the <a href="pages/account/register#">agreement</a>
                         </Checkbox>
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>

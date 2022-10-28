@@ -23,6 +23,7 @@ function Publish(){
     const form=useRef(null)
 
 
+    // backfill the content
     const onUploadChange=({fileList})=>{
         const formatList=fileList.map(file=>{
             if (file.response){
@@ -37,6 +38,7 @@ function Publish(){
     }
 
 
+    // Show images depended on selections
     const radioChange=(e)=>{
         const count=e.target.value
         setImgCount(count)
@@ -68,11 +70,9 @@ function Publish(){
         }
 
         if (id){
-            // await http.put(`http://geek.itheima.net/v1_0/mp/articles/${id}?draft=false`, params)
-            await http.put(`/my/article/${id}`, params)//从这开始
+            await http.put(`/my/article/${id}`, params)  // if has, update that article
         }else {
-            // await http.post('http://geek.itheima.net/v1_0/mp/articles?draft=false', params)
-            await http.post(`/my/add`, params)
+            await http.post(`/my/add`, params)  //Start here if there is no corresponding article id
         }
 
         navigate('/article')
@@ -80,11 +80,10 @@ function Publish(){
     }
 
 
+    // backfill the image(s) from existing caches
     useEffect(()=>{
         const loadDetail=async ()=>{
-            // const res=await http.get(`http://geek.itheima.net/v1_0/mp/articles/${id}`)
             const res=await http.get(`/my/article/${id}`)
-            // const data=res.data
             const data=res.articles
 
             form.current.setFieldsValue({...data, type: data.cover.type})

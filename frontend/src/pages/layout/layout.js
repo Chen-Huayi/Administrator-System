@@ -14,6 +14,7 @@ function MyLayout () {
     const {userStore, loginStore, channelStore}=useStore()
     const [collapsed, setCollapsed] = useState(false);
 
+    // Display user and channel id information
     useEffect(()=>{
         userStore.getUserInfo()
         channelStore.loadChannelList()
@@ -33,6 +34,7 @@ function MyLayout () {
         navigate('/login')
     }
 
+    // Setting Menu button: has two functionalities
     const menu = (
         <Menu
             items={[

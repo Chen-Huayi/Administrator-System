@@ -11,17 +11,18 @@ exports.login=(req, res)=>{
         if (err) {
             return res.msg(err)
         }
-        if (results.length !== 1) {
+        if (results.length !== 1) {  // no such result found
             return res.msg('Wrong username!')
         }
 
+        // Check and match password between database
         const compareResult = bcrypt.compareSync(userinfo.code, results[0].password)
-        if (!compareResult){  // userinfo.code!==results[0].password
+        if (!compareResult){  // userinfo.code NOT EQUAL TO results[0].password
             return res.msg('Wrong password!')
         }
 
-        const user = { ...results[0], password: ''}
-        const {password, ...rest}=user
+        const user = { ...results[0], password: ''}  // hide password in transmission
+        const {password, ...rest}=user  // Get rid of password element
 
         const sql=`insert into login_history set ?`
         db.query(sql, rest)
@@ -45,13 +46,14 @@ exports.register=(req, res)=>{
     const sql = `select * from users where username=?`
 
     db.query(sql, [userinfo.username], (err, results)=>{
-        if (results.length > 0) {
+        if (results.length > 0) {  // Already exist this username
             return res.msg('User name is occupied!')
         }
 
         userinfo.password=bcrypt.hashSync(userinfo.password, 7)
 
         const sql=`insert into users set ?`
+        // Insert information form
         db.query(sql, {
             username: userinfo.username,
             password: userinfo.password,
@@ -70,13 +72,13 @@ exports.register=(req, res)=>{
 }
 
 exports.profile=(req, res)=>{
-    const sql=`select * from login_history`
+    const sql=`select * from login_history`  // Get current user information
 
     db.query(sql, (err, results)=>{
         if (err){
             return res.msg(err)
         }
-        if (results.length!==1){
+        if (results.length!==1){  // Fail / Not found
             return res.msg('Load profile failure')
         }
         res.send({
@@ -103,6 +105,7 @@ exports.exit=(req, res)=>{
 }
 
 exports.updateUserInfo=(req, res)=>{
+    // Updated by given new information
     const updateDB = (res, newInfo, id) => {
         const sql =`update users set ? where id=?`
 
@@ -116,7 +119,7 @@ exports.updateUserInfo=(req, res)=>{
         res.msg('Update successfully!', 0)   // Update successfully
     }
 
-    const sql=`select username from login_history`
+    const sql=`select username from login_history`  // Get current user's name
 
     db.query(sql, (err, results)=>{
         if (results.length !== 1)
@@ -130,16 +133,17 @@ exports.updateUserInfo=(req, res)=>{
             const {prefix, ...rest} = updateReq
             const newInfo = updateReq.phone ? {...rest, phone: '+'+updateReq.prefix+' '+updateReq.phone} : {...rest}
             const id = results[0].id
-            console.log('update: ->', newInfo, id)
 
+            // If not change
             if (Object.keys(newInfo).length===0){
                 return res.msg('You never make any change!', 0)
             }
 
+            // Username is changed
             if (newInfo.username){
                 const sql = `select * from users where username=?`
                 db.query(sql, newInfo.username, (err, results)=>{
-                    if (results.length > 0 && currentUsername!==newInfo.username) {
+                    if (results.length > 0 && currentUsername!==newInfo.username) {  // Check username validation
                         return res.msg('User name is occupied!')
                     }
                     updateDB(res, newInfo, id)
@@ -156,7 +160,6 @@ exports.updateUserInfo=(req, res)=>{
 
 exports.updatePassword=(req, res)=>{
     const oldPassword=req.body.old_password
-
     const sql=`select username from login_history`
 
     db.query(sql, (err, results)=>{
@@ -167,8 +170,9 @@ exports.updatePassword=(req, res)=>{
         const sql=`select * from users where username=?`
 
         db.query(sql, username, (err, results)=>{
-            const compareResult = bcrypt.compareSync(oldPassword, results[0].password)  // 判断提交的旧密码是否正确
-            if (!compareResult) {  // oldPassword!==results[0].password
+            // Determine if the submitted old password is correct
+            const compareResult = bcrypt.compareSync(oldPassword, results[0].password)
+            if (!compareResult) {  // oldPassword NOT EQUAL TO results[0].password
                 return res.msg('The old password is wrong!')
             }
             const sql=`update users set password=? where username=?`

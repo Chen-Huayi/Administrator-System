@@ -27,10 +27,10 @@ app.use('/api', accountRouter)
 app.use('/my', articleRouter)
 
 app.use((err, req, res, next)=>{
-    if (err instanceof joi.ValidationError){  // 验证失败导致的错误
+    if (err instanceof joi.ValidationError){  // Error caused by failed validation
         return res.msg(err)
     }
-    if (err.name === 'UnauthorizedError')  // 错误中间件
+    if (err.name === 'UnauthorizedError')  // Middleware error
         return res.msg('Authorization Error!')
     res.msg(err)  // Unknown error
 })

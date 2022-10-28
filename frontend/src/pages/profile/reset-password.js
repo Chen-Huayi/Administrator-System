@@ -87,6 +87,7 @@ const ChangePassword = () => {
                             required: true,
                             message: 'Please confirm your password!',
                         },
+                        // verify whether two passwords are matched
                         ({ getFieldValue }) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue('password') === value) {

@@ -27,10 +27,9 @@ function Article () {
 
 
     const onFinish=(values)=>{
-        console.log(values)
-
         const {channel_id , date, status}=values
         const parameter={}
+
         if (status!==-1){
             parameter.status = status
         }
@@ -60,7 +59,6 @@ function Article () {
 
 
     const deleteArticle=async (data)=>{
-        // await http.delete(`http://geek.itheima.net/v1_0/mp/articles/${data.id}`)
         await http.get(`/my/delete/${data.id}`)
         setParams({
             ...params,
@@ -129,10 +127,9 @@ function Article () {
     ]
 
 
+    // load article list
     useEffect(() => {
         const loadList=async ()=>{
-            // const res = await http.get('http://geek.itheima.net/v1_0/mp/articles', { params })
-            // const { results, total_count } = res.data
             const res = await http.get('/my/article', {params})
             const { articles, size } = res
             setArticleList({
@@ -144,6 +141,7 @@ function Article () {
     }, [params])
 
 
+    // Display channel options
     useEffect(()=>{
         setChannels(channelStore.channelList.map((channel, i)=>(
             <Option key={i} value={i}>{channel}</Option>

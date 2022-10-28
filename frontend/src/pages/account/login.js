@@ -27,6 +27,7 @@ function Login() {
         console.log('Failed: ', err)
     }
 
+    // Go to register interface
     function register(){
         navigate('/register')
     }
@@ -39,8 +40,6 @@ function Login() {
                 <Form
                     initialValues={{
                         remember: true,
-                        // mobile: 12345678900,
-                        // code: 246810
                     }}
                     onFinish={onFinished}
                     onFinishFailed={onFinishedFailed}
@@ -71,8 +70,7 @@ function Login() {
                         rules={[
                             {
                                 min: 6,
-                                // len: 8,
-                                // message: 'Need 8 character password',
+                                // message: 'At least 6 character password',
                                 validateTrigger: 'onBlur'
                             },
                             {

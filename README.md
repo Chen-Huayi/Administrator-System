@@ -12,6 +12,7 @@ Continually updated...✅
   + [x] Delete articles 
 + [x] Upload your own articles 
 + [ ] View like, dislike, or read count
++ [ ] Time range search and channels filter
 
 ## Languages and Tools
 + **Frontend**: React

@@ -21,6 +21,7 @@
         "express-jwt": "^5.3.3",
         "joi": "^17.6.2",
         "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.7.0",
         "mysql": "^2.18.1",
         "tedious": "^15.1.0"
     },

@@ -81,7 +81,7 @@ function MyLayout () {
                         mode="inline"
                         theme="light"
                         defaultSelectedKeys={[pathname]}
-                        style={{ height: '100%', borderRight: 0, 'font-size': 'large' }}
+                        style={{ height: '100%', borderRight: 0, 'fontSize': 'large' }}
                     >
                         <Menu.Item icon={<HomeOutlined />} key="/">
                             <Link to={'/'}>Overview </Link>

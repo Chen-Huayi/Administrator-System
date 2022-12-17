@@ -3,7 +3,7 @@ import {getToken} from "utils/token";
 import {history} from "utils/history";
 
 const http = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:8000',
     timeout: 5000
 })
 // Add request interceptors

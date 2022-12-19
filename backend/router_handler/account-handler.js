@@ -40,8 +40,9 @@ exports.login=(req, res)=>{
 exports.register=(req, res)=>{
     const userinfo = req.body
     const sql = `select * from users where username=?`
-
-    db.query(sql, [userinfo.username], (err, results)=>{
+    console.log(userinfo)
+    db.query(sql, userinfo.username, (err, results)=>{
+        console.log(err)
         if (results.length > 0) {  // Already exist this username
             return res.msg('User name is occupied!')
         }

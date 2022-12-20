@@ -8,19 +8,16 @@ exports.login=(req, res)=>{
     const sql=`select * from users where username=?`
 
     db.query(sql, userinfo.username, (err, results)=>{
-        if (err) {
+        if (err)
             return res.msg(err)
-        }
-        if (results.length !== 1) {  // no such result found
+        if (results.length !== 1)   // no such result found
             return res.msg('Wrong username!')
-        }
-
         // Check and match password between database
         const compareResult = bcrypt.compareSync(userinfo.password, results[0].password)
+
         if (!compareResult){  // userinfo.password NOT EQUAL TO results[0].password
             return res.msg('Wrong password!')
         }
-
         const user = { ...results[0], password: ''}  // hide password in transmission
 
         const tokenStr = jwt.sign(
@@ -31,42 +28,34 @@ exports.login=(req, res)=>{
         res.send({
             status: 0,
             username: userinfo.username,
-            token: 'Bearer '+tokenStr
+            token: tokenStr
         })
     })
 
 }
 
 exports.register=(req, res)=>{
-    const userinfo = req.body
+    const userInfo = req.body
     const sql = `select * from users where username=?`
-    console.log(userinfo)
-    db.query(sql, userinfo.username, (err, results)=>{
-        console.log(err)
+
+    db.query(sql, userInfo.username, (err, results)=>{
         if (results.length > 0) {  // Already exist this username
             return res.msg('User name is occupied!')
         }
-
-        userinfo.password=bcrypt.hashSync(userinfo.password, 7)
+        userInfo.password=bcrypt.hashSync(userInfo.password, 7)
 
         const sql=`insert into users set ?`
         // Insert information form
-        db.query(sql, {
-            username: userinfo.username,
-            password: userinfo.password,
-            email: userinfo.email,
-            phone: '+'+userinfo.prefix+' '+userinfo.phone,
-            gender: userinfo.gender
-        }, (err, results)=>{
+        db.query(sql, {...userInfo}, (err, results)=>{
             if (results.affectedRows !== 1) {
                 return res.msg('Register failure')
             }
             res.msg('Register successfully!', 0)
         })
-
     })
-
 }
+
+/*
 
 exports.getProfile=(req, res)=>{
     const sql=`select * from users where username=?`  // Get current user information
@@ -75,7 +64,7 @@ exports.getProfile=(req, res)=>{
         if (err){
             return res.msg(err)
         }
-        if (results.length!==1){  // Fail / Not found
+        if (results.length!==1){  // Fail to found
             return res.msg('Load profile failure')
         }
         res.send({
@@ -89,19 +78,18 @@ exports.getProfile=(req, res)=>{
 
 }
 
+*/
+
 exports.updateUserInfo=(req, res)=>{
     // Updated by given new information
     const sql=`select * from users where username=?`
-    const currentUsername=req.body.username
+    const username=req.body.username
 
-    db.query(sql, currentUsername, (err, results)=>{
-        const updateReq = req.body
-        const {prefix, ...rest} = updateReq
-        const newInfo = updateReq.phone ? {...rest, phone: '+'+updateReq.prefix+' '+updateReq.phone} : {...rest}
+    db.query(sql, username, (err, results)=>{
         const id = results[0].id
-        const sql =`update users set ? where id=?`
+        const sql=`update users set ? where id=?`
 
-        db.query(sql, [newInfo, id], (err, results)=>{
+        db.query(sql, [req.body, id], (err, results)=>{
             if (results.affectedRows !== 1){
                 return res.msg('Fail to update!')
             }

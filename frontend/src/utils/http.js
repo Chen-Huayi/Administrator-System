@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getToken} from "utils/token";
+import {getToken, removeToken} from "utils/token";
 import {history} from "utils/history";
 
 const http = axios.create({
@@ -20,6 +20,9 @@ http.interceptors.request.use((config)=> {
 // Add response interceptors
 http.interceptors.response.use((response)=> {
     // This function is triggered for any status code between 200 and 299
+    if (response.data.status === 401) {
+        removeToken()
+    }
     return response.data
 }, (error)=> {
     // Triggered for any status code outside the 299 range

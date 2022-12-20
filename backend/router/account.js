@@ -9,7 +9,7 @@ router.post('/login', expressJoi(login), accountHandler.login)
 
 router.post('/register', expressJoi(register), accountHandler.register)
 
-router.get('/profile/:id', accountHandler.getProfile)
+// router.get('/profile/:id', accountHandler.getProfile)
 
 router.post('/updateinfo', expressJoi(update_userinfo), accountHandler.updateUserInfo)
 

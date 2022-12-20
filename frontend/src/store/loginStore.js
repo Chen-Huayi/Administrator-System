@@ -3,6 +3,9 @@ import {getToken, http, removeToken, setToken} from "utils";
 
 class LoginStore{
     token=getToken() || ''
+    username
+    email
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -12,10 +15,14 @@ class LoginStore{
         // this.token=result.data.token
         //////////////////------------------------------------------------------------
         const result=await http.post('/api/login', values)
-        this.token=result.token
-        if (result.status===1)
-            this.token=''
 
+        if (result.status===1){
+            this.token=''
+        }else {
+            this.token=result.token
+            this.username=result.username
+            this.email=result.email
+        }
         setToken(this.token)
     }
 

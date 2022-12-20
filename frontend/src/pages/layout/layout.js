@@ -16,7 +16,7 @@ function MyLayout () {
 
     // Display user and channel id information
     useEffect(()=>{
-        userStore.getUserInfo()
+        // userStore.getUserInfo()
         channelStore.loadChannelList()
     }, [userStore, channelStore])
 
@@ -30,7 +30,6 @@ function MyLayout () {
 
     const onConfirm=()=>{
         loginStore.logOut()
-        userStore.clearUserInfo()
         navigate('/login')
     }
 
@@ -53,8 +52,8 @@ function MyLayout () {
             <Header className="header" >
                 <div className="logo" />
                 <div className="user-info">
-                    <span className="user-profile">{userStore.userInfo.name}</span>
-                    <span className="user-profile">{userStore.userInfo.email}</span>
+                    <span className="user-profile">{userStore.username}</span>
+                    <span className="user-profile">{userStore.email}</span>
                     <span className="user-profile">
                         <Dropdown overlay={menu} trigger={['click']}>
                             <a onClick={(e) => e.preventDefault()} >

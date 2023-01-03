@@ -17,7 +17,7 @@ Continually updated...✅
 ## Languages and Tools
 + **Frontend**: React
 + **Backend**: Node.js (Express)
-+ **Database**: Azure Database for MySQL
++ **Database**: MySQL
 + **Tools**: WebStorm, Postman, MySQL Workbench, Navicat
 
 ## How to Run ▶️
@@ -26,19 +26,19 @@ Continually updated...✅
 git clone https://github.com/Chen-Huayi/Administrator-System.git
 ```
 **Run**
-+ In `/Administrator-System/backend` directory: 
++ In `/backend` directory: 
 ```shell
 npm install
-npm run server
+npm start
 ```
-+ In `/Administrator-System/frontend` directory: 
++ In `/frontend` directory: 
 ```shell
 npm install
-npm run app
+npm start
 ```
 
 ## Preview Images
-![](/img/login.png)
-![](/img/register.png)
-![](/img/content-manager.png)
-![](/img/publish.png)
+![](https://github.com/Chen-Huayi/pictures/blob/main/admin_system/admin_login.png)
+![](https://github.com/Chen-Huayi/pictures/blob/main/admin_system/admin_register.png)
+![](https://github.com/Chen-Huayi/pictures/blob/main/admin_system/content-manager.png)
+![](https://github.com/Chen-Huayi/pictures/blob/main/admin_system/admin_publish.png)
